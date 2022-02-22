@@ -1,0 +1,469 @@
+{
+  "theme": {
+    "name": "JewelryBoxTheme",
+    "styles": [
+      "red",
+      "default",
+      "black",
+      "green",
+      "cyan",
+      "purple",
+      "blue",
+      "yellow"
+    ],
+    "version": "2.20",
+    "sharedTheme": {
+      "isPortalSupport": true,
+      "useHeader": false,
+      "useLogo": false
+    }
+  },
+  "portalUrl": "https://wfrc.maps.arcgis.com",
+  "appId": "",
+  "authorizedCrossOriginDomains": [],
+  "title": "Special Generators",
+  "subtitle": "Wasatch Front Regional Council",
+  "keepAppState": true,
+  "logo": "images/app-logo.png",
+  "geometryService": "https://utility.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer",
+  "links": [],
+  "widgetOnScreen": {
+    "widgets": [
+      {
+        "uri": "themes/JewelryBoxTheme/widgets/HeaderController/Widget",
+        "position": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "height": 40,
+          "relativeTo": "browser"
+        },
+        "version": "2.20",
+        "id": "themes_JewelryBoxTheme_widgets_HeaderController_Widget_21",
+        "name": "HeaderController"
+      },
+      {
+        "uri": "widgets/Scalebar/Widget",
+        "position": {
+          "left": 7,
+          "bottom": 25,
+          "relativeTo": "map"
+        },
+        "version": "2.20",
+        "id": "widgets_Scalebar_Widget_22",
+        "name": "Scalebar"
+      },
+      {
+        "uri": "widgets/Search/Widget",
+        "position": {
+          "left": 55,
+          "top": 5,
+          "relativeTo": "map"
+        },
+        "version": "2.20",
+        "id": "widgets_Search_Widget_23",
+        "name": "Search"
+      },
+      {
+        "uri": "widgets/Coordinate/Widget",
+        "position": {
+          "left": 7,
+          "bottom": 5,
+          "relativeTo": "map"
+        },
+        "version": "2.20",
+        "id": "widgets_Coordinate_Widget_24",
+        "name": "Coordinate"
+      },
+      {
+        "position": {
+          "left": 55,
+          "top": 45,
+          "relativeTo": "map"
+        },
+        "placeholderIndex": 1,
+        "id": "_25"
+      },
+      {
+        "position": {
+          "left": 105,
+          "top": 45,
+          "relativeTo": "map"
+        },
+        "placeholderIndex": 2,
+        "id": "_26"
+      },
+      {
+        "position": {
+          "left": 155,
+          "top": 45,
+          "relativeTo": "map"
+        },
+        "placeholderIndex": 3,
+        "id": "_27"
+      },
+      {
+        "uri": "widgets/OverviewMap/Widget",
+        "position": {
+          "right": 0,
+          "bottom": 0,
+          "relativeTo": "map"
+        },
+        "version": "2.20",
+        "id": "widgets_OverviewMap_Widget_28",
+        "name": "OverviewMap"
+      },
+      {
+        "uri": "widgets/HomeButton/Widget",
+        "position": {
+          "left": 7,
+          "top": 75,
+          "relativeTo": "map"
+        },
+        "version": "2.20",
+        "id": "widgets_HomeButton_Widget_29",
+        "name": "HomeButton"
+      },
+      {
+        "uri": "widgets/MyLocation/Widget",
+        "position": {
+          "left": 7,
+          "top": 110,
+          "relativeTo": "map"
+        },
+        "version": "2.20",
+        "id": "widgets_MyLocation_Widget_30",
+        "name": "MyLocation"
+      },
+      {
+        "uri": "widgets/AttributeTable/Widget",
+        "version": "2.20",
+        "position": {
+          "relativeTo": "browser"
+        },
+        "id": "widgets_AttributeTable_Widget_31",
+        "name": "AttributeTable"
+      },
+      {
+        "uri": "widgets/Splash/Widget",
+        "visible": false,
+        "position": {
+          "relativeTo": "browser"
+        },
+        "version": "2.20",
+        "id": "widgets_Splash_Widget_32",
+        "name": "Splash"
+      },
+      {
+        "uri": "widgets/ZoomSlider/Widget",
+        "position": {
+          "top": 5,
+          "left": 7,
+          "relativeTo": "map"
+        },
+        "version": "2.20",
+        "id": "widgets_ZoomSlider_Widget_33",
+        "name": "ZoomSlider"
+      },
+      {
+        "uri": "widgets/ExtentNavigate/Widget",
+        "visible": false,
+        "position": {
+          "top": 148,
+          "left": 7,
+          "relativeTo": "map"
+        },
+        "version": "2.20",
+        "id": "widgets_ExtentNavigate_Widget_34",
+        "name": "ExtentNavigate"
+      },
+      {
+        "uri": "widgets/FullScreen/Widget",
+        "visible": false,
+        "position": {
+          "right": 8,
+          "top": 8,
+          "relativeTo": "map"
+        },
+        "version": "2.20",
+        "id": "widgets_FullScreen_Widget_35",
+        "name": "FullScreen"
+      }
+    ],
+    "groups": [
+      {
+        "visible": false,
+        "panel": {
+          "uri": "themes/JewelryBoxTheme/panels/LDockablePanel/Panel",
+          "position": {
+            "left": 0,
+            "top": 40,
+            "bottom": 0,
+            "width": 360,
+            "relativeTo": "browser"
+          }
+        },
+        "maxWidgets": 1,
+        "placeholderIndex": 1,
+        "id": "_20",
+        "widgets": [
+          {
+            "name": "CustomWidgetTemplate",
+            "version": "2.20",
+            "IsController": false,
+            "uri": "widgets/CustomWidgetTemplate/Widget",
+            "config": null,
+            "id": "widgets_CustomWidgetTemplate_Widget_36"
+          }
+        ],
+        "label": "Group 0"
+      }
+    ],
+    "panel": {
+      "uri": "jimu/OnScreenWidgetPanel",
+      "position": {
+        "relativeTo": "map"
+      }
+    }
+  },
+  "map": {
+    "3D": false,
+    "2D": true,
+    "position": {
+      "left": 0,
+      "top": 40,
+      "right": 0,
+      "bottom": 0
+    },
+    "itemId": "cb076c912dce4b39930c06f46f39d251",
+    "mapOptions": {
+      "extent": {
+        "xmin": -12531457.717575736,
+        "ymin": 4825625.933980718,
+        "xmax": -12368819.941526828,
+        "ymax": 5105715.367673968,
+        "spatialReference": {
+          "wkid": 102100
+        }
+      }
+    },
+    "id": "map",
+    "portalUrl": "https://wfrc.maps.arcgis.com/"
+  },
+  "widgetPool": {
+    "panel": {
+      "uri": "themes/JewelryBoxTheme/panels/FoldablePanel/Panel",
+      "position": {
+        "top": 5,
+        "right": 5,
+        "bottom": 5,
+        "zIndex": 5,
+        "relativeTo": "map"
+      }
+    },
+    "widgets": [
+      {
+        "uri": "widgets/Legend/Widget",
+        "version": "2.20",
+        "id": "widgets_Legend_Widget_18",
+        "name": "Legend",
+        "index": 0
+      },
+      {
+        "uri": "widgets/LayerList/Widget",
+        "version": "2.20",
+        "id": "widgets_LayerList_Widget_19",
+        "name": "LayerList",
+        "index": 1
+      }
+    ],
+    "groups": []
+  },
+  "mobileLayout": {
+    "widgetOnScreen": {
+      "widgets": [
+        {
+          "uri": "themes/JewelryBoxTheme/widgets/HeaderController/Widget",
+          "position": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "height": 40,
+            "relativeTo": "browser"
+          },
+          "version": "2.20"
+        },
+        {
+          "uri": "widgets/Scalebar/Widget",
+          "position": {
+            "left": 7,
+            "bottom": 40,
+            "relativeTo": "map"
+          },
+          "version": "2.20"
+        },
+        {
+          "uri": "widgets/Search/Widget",
+          "position": {
+            "left": 55,
+            "top": 5
+          },
+          "version": "2.20"
+        },
+        {
+          "uri": "widgets/Coordinate/Widget",
+          "position": {
+            "left": 7,
+            "bottom": 17,
+            "relativeTo": "map"
+          },
+          "version": "2.20"
+        },
+        {
+          "position": {
+            "left": 55,
+            "top": 45
+          }
+        },
+        {
+          "position": {
+            "left": 105,
+            "top": 45
+          }
+        },
+        {
+          "position": {
+            "left": 155,
+            "top": 45
+          }
+        },
+        {
+          "uri": "widgets/OverviewMap/Widget",
+          "position": {
+            "right": 0,
+            "bottom": 0
+          },
+          "version": "2.20"
+        },
+        {
+          "uri": "widgets/HomeButton/Widget",
+          "inPanel": false,
+          "position": {
+            "left": 7,
+            "top": 75
+          },
+          "version": "2.20"
+        },
+        {
+          "uri": "widgets/MyLocation/Widget",
+          "inPanel": false,
+          "position": {
+            "left": 7,
+            "top": 110
+          },
+          "version": "2.20"
+        },
+        {
+          "uri": "widgets/AttributeTable/Widget",
+          "version": "2.20",
+          "position": {
+            "relativeTo": "browser"
+          }
+        },
+        {
+          "uri": "widgets/Splash/Widget",
+          "visible": false,
+          "position": {
+            "relativeTo": "browser"
+          },
+          "version": "2.20"
+        },
+        {
+          "uri": "widgets/ZoomSlider/Widget",
+          "visible": true,
+          "position": {
+            "top": 5,
+            "left": 7
+          },
+          "version": "2.20"
+        },
+        {
+          "uri": "widgets/ExtentNavigate/Widget",
+          "visible": false,
+          "position": {
+            "top": 148,
+            "left": 7
+          },
+          "version": "2.20"
+        },
+        {
+          "uri": "widgets/FullScreen/Widget",
+          "visible": false,
+          "position": {
+            "right": 8,
+            "top": 8
+          },
+          "version": "2.20"
+        }
+      ],
+      "groups": [
+        {
+          "visible": false,
+          "panel": {
+            "uri": "themes/JewelryBoxTheme/panels/LDockablePanel/Panel",
+            "position": {
+              "left": 0,
+              "top": 40,
+              "bottom": 0,
+              "width": 360,
+              "relativeTo": "browser"
+            }
+          },
+          "maxWidgets": 1
+        }
+      ]
+    },
+    "map": {
+      "position": {
+        "left": 0,
+        "top": 40,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    "widgetPool": {
+      "panel": {
+        "uri": "themes/JewelryBoxTheme/panels/FoldablePanel/Panel",
+        "position": {
+          "top": 5,
+          "right": 5,
+          "bottom": 5,
+          "zIndex": 5
+        }
+      }
+    }
+  },
+  "loadingPage": {
+    "backgroundColor": "#508dca",
+    "backgroundImage": {
+      "visible": false
+    },
+    "loadingGif": {
+      "visible": true,
+      "uri": "configs/loading/images/predefined_loading_1.gif",
+      "width": 58,
+      "height": 29
+    }
+  },
+  "wabVersion": "2.20",
+  "isTemplateApp": true,
+  "isWebTier": false,
+  "httpProxy": {
+    "useProxy": true,
+    "url": "https://i7-088629.wfrc1.local:3344/proxy.js"
+  },
+  "dataSource": {
+    "dataSources": {},
+    "settings": {}
+  }
+}
