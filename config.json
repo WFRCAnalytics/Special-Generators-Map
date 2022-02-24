@@ -208,12 +208,12 @@
         "id": "_20",
         "widgets": [
           {
-            "name": "CustomWidgetTemplate",
+            "name": "SpecialGenerators",
             "version": "2.20",
             "IsController": false,
-            "uri": "widgets/CustomWidgetTemplate/Widget",
+            "uri": "widgets/SpecialGenerators/Widget",
             "config": null,
-            "id": "widgets_CustomWidgetTemplate_Widget_36"
+            "id": "widgets_SpecialGenerators_Widget_36"
           }
         ],
         "label": "Group 0"
