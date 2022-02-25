@@ -21,8 +21,8 @@
   "portalUrl": "https://wfrc.maps.arcgis.com",
   "appId": "",
   "authorizedCrossOriginDomains": [],
-  "title": "Special Generators",
-  "subtitle": "Wasatch Front Regional Council",
+  "title": "Origin-Destination Data for Special Generator TAZs - 2019",
+  "subtitle": "StreetLight Data -  Wasatch Front Regional Council",
   "keepAppState": true,
   "logo": "images/app-logo.png",
   "geometryService": "https://utility.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer",
@@ -208,15 +208,15 @@
         "id": "_20",
         "widgets": [
           {
-            "name": "SpecialGenerators",
+            "name": "CustomWidgetTemplate",
             "version": "2.20",
             "IsController": false,
             "uri": "widgets/SpecialGenerators/Widget",
-            "config": null,
             "id": "widgets_SpecialGenerators_Widget_36"
           }
         ],
-        "label": "Group 0"
+        "label": "Group 0",
+        "icon": "widgets/SpecialGenerators/images/icon.png?wab_dv=2.20"
       }
     ],
     "panel": {
@@ -235,20 +235,13 @@
       "right": 0,
       "bottom": 0
     },
-    "itemId": "cb076c912dce4b39930c06f46f39d251",
-    "mapOptions": {
-      "extent": {
-        "xmin": -12531457.717575736,
-        "ymin": 4825625.933980718,
-        "xmax": -12368819.941526828,
-        "ymax": 5105715.367673968,
-        "spatialReference": {
-          "wkid": 102100
-        }
-      }
-    },
+    "itemId": "a4a264335c8b4b9e86519779a50b1bab",
+    "mapOptions": {},
     "id": "map",
-    "portalUrl": "https://wfrc.maps.arcgis.com/"
+    "portalUrl": "https://wfrc.maps.arcgis.com",
+    "mapRefreshInterval": {
+      "useWebMapRefreshInterval": true
+    }
   },
   "widgetPool": {
     "panel": {

@@ -1,38 +1,65 @@
 <div>
-    <br/>
-    <br/>
+    
     <table>
         <tr>
             <td>
-                <div style="display: inline; line-height: 200%;" >Special Generator:</div>
+                <div style="display: inline; line-height: 200%;" ><strong>TAZ for<br/>Special Generator:</strong></div>
             </td>
             <td>
-                <div style="display: inline" id="cmbSpecGen" data-dojo-type="dojox.form.Select"></div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div style="display: inline; line-height: 200%;" >Day Type:</div>
-            </td>
-            <td>
-                <div style="display: inline" id="cmbDayType" data-dojo-type="dojox.form.Select"></div>
+                <div style="display: inline" id="cmbSpecGen" data-dojo-type="dojox.form.Select"></div><div id="SG_Zoom" style="text-align: right; padding: 1px; display: inline; line-height: 150%;">&nbsp;<input type="checkbox" id="chkAutoPan" name="AutoPan" data-dojo-type="dijit/form/CheckBox" checked /><label for="chkAutoPan"><small>&nbsp;Auto Pan</small></div></label>
             </td>
         </tr>
         <tr>
             <td>
-                <div style="display: inline; line-height: 200%;" >Data Period:</div>
+                <div style="display: inline; line-height: 200%;" ><strong>Map Display Zones:</strong></div>
             </td>
             <td>
-                <div style="display: inline" id="cmbDataPer" data-dojo-type="dojox.form.Select"></div>
+                <div style="display: inline" id="cmbMapDisplayZone" data-dojo-type="dojox.form.Select"></div>
             </td>
         </tr>
         <tr>
-            <td>
-                <div style="display: inline; line-height: 200%;" >Day Part:</div>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                <div><strong>Day Type:</strong></div>
+                <div id="divDayTypeSection"></div>
+                <br/>
+                <div><strong>Data Period:</strong></div>
+                <div id="divDataPerSection"></div>
             </td>
-            <td>
-                <div style="display: inline" id="cmbDayPart" data-dojo-type="dojox.form.Select"></div>
+            <td style="vertical-align:top">
+                <div><strong>Day Part:</strong></div>
+                <div id="divDayPartSection"></div>
+                <br/>
+                <div><strong>Label:</strong></div>
+                <div id="divVolumeOrPercentLabelSection"></div>
+                <br/><div id="SG_Labels"   style="text-align: right; padding: 1px; display: inline; line-height: 150%;"><input type="checkbox" id="chkLabels"   name="Labels"   data-dojo-type="dijit/form/CheckBox" checked /><label for="chkLabels"><small>&nbsp;Show Labels</small></label></div>
+                <br/>
+                <div hidden><strong>Display:</strong></div>
+                <div id="divVolumeOrPercentSection" hidden></div>
             </td>
         </tr>
     </table>
+    <table>
+        <tr>
+            <td>Number Total Trips:</td>
+            <td><div></div></td>
+        </tr>
+        <tr>
+            <td>Number Internal to Zone Trips:</td>
+            <td><div></div></td>
+        </tr>
+        <tr>
+            <td>Number External to State:</td>
+            <td><div></div></td>
+        </tr>
+        <tr>
+            <td>Number External to Zone Trips:</td>
+            <td><div></div></td>
+        </tr>
+    </table>
+    
+
+
   </div>

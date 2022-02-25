@@ -1,33 +1,47 @@
-//javascript for controlling Special Generator WebMap
-//written by Bill Hereth February 2022
+// javascript for controlling Special Generator WebMap
+// written by Bill Hereth February 2022
 
 var dChartX = [2019, 2030, 2040, 2050];
 
-var dChartSeries = [
-    { label: "Jobs"               , category: "JB"  },
-    { label: "Households"         , category: "HH"  },
-    { label: "Jobs and Households", category: "COMP"}
+var dMapDisplayZones = [
+    { label: "TAZ"            , value: "CO_TAZID", minScaleForLabels:   80000 },
+    { label: "Medium District", value: "DISTMED" , minScaleForLabels: 1280000 },
+    { label: "Large District" , value: "DISTLRG" , minScaleForLabels: 1920000 }
 ];
+
+var dVolumeOrPercent = [
+    { label: "Trips Ends", value: "V"},
+    { label: "Percent"   , value: "P" }
+];
+
+
+var sDayType = "1"; // 1:Weekdays
+var sDayPart = "0"; // 1:All Day
+var sDataPer = "1"; // 1:All Year
+var sSpecGen = "UOFU_MAIN";
+var sMapDisp = "DISTMED";
+var sVol_Per = "P";
+var sVol_Per_Label = "P";
+
+var wSG;
 
 var dChartLineTypes_TAZ    = [];
 var dChartLineTypes_Area = [];
 
-var fnTAZID = "CO_TAZID";
-
-//ATO Variables
-var curCategory = '';
-var curSpecGen  = '';
-var curDisplay  = '';
+// ATO Variables
+var curSpecGen = sSpecGen;
+var curMapDisp = sMapDisp;
+var curDayType = sDayType;
+var curDataPer = sDataPer;
+var curDayPart = sDayPart;
+var curVol_Per = sVol_Per;
+var curVol_Per_Label = sVol_Per;
 var lyrTAZ;
-var lyrAreas;
 var lyrDispLayers = []          ;
-var sDispLayersP  = "ATO_gdb - "; //prefix for layer names
-var sDispLayers   = []          ; //layer name for all display layers (filled programatically)
-var sTAZLayer     = "TAZ_ATO"   ; //layer name for TAZs
-var sAreasLayer   = "Areas_ATO" ; //layer name for Areas
-var sCDefaultGrey = "#CCCCCC"   ; //color of default line
-var sFNATOTAZID   = "TAZID"     ; //field name for TAZID
-var sFNATOBinP    = "BIN_"      ; //field name for display (color) using bins
+var sDispLayers   = []          ; // layer name for all display layers (filled programatically)
+var sTAZLayer     = "TAZ"       ; // layer name for TAZs
+var sCDefaultGrey = "#CCCCCC"   ; // color of default line
+var sFNSGTAZID    = "SA_TAZID"  ; // field name for TAZID
 var chartkey      = []          ;
 var chartdata     = []          ;
 
@@ -77,8 +91,9 @@ define(['dojo/_base/declare',
         'esri/InfoTemplate',
         'esri/Color',
         'esri/map',
-        'esri/renderers/UniqueValueRenderer',
+        'esri/renderers/ClassBreaksRenderer',
         'esri/geometry/Extent',
+        'esri/geometry/Point',
         'dojo/store/Memory',
         'dojox/charting/StoreSeries',
         'dijit/Dialog',
@@ -92,14 +107,14 @@ define(['dojo/_base/declare',
         'dojo/store/Observable',
         'dojox/charting/axis2d/Default',
         'dojo/domReady!'],
-function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart, Claro, Julie, SimpleTheme, Scatter, Markers, Columns, Legend, Tooltip, TableContainer, ScrollPane, ContentPane, PanelManager, TextBox, ToggleButton, LayerInfos, Query, QueryTask, FeatureLayer, FeatureTable, SimpleFillSymbol, SimpleLineSymbol, SimpleMarkerSymbol, TextSymbol, Font, LabelClass, InfoTemplate, Color, Map, UniqueValueRenderer, Extent, Memory, StoreSeries, Dialog, Button, RadioButton, MutliSelect, CheckedMultiSelect, Select, ComboBox, CheckBox, Observable) {
-    //To create a widget, you need to derive from BaseWidget.
+function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart, Claro, Julie, SimpleTheme, Scatter, Markers, Columns, Legend, Tooltip, TableContainer, ScrollPane, ContentPane, PanelManager, TextBox, ToggleButton, LayerInfos, Query, QueryTask, FeatureLayer, FeatureTable, SimpleFillSymbol, SimpleLineSymbol, SimpleMarkerSymbol, TextSymbol, Font, LabelClass, InfoTemplate, Color, Map, ClassBreaksRenderer, Extent, Point, Memory, StoreSeries, Dialog, Button, RadioButton, MutliSelect, CheckedMultiSelect, Select, ComboBox, CheckBox, Observable) {
+    // To create a widget, you need to derive from BaseWidget.
     
     return declare([BaseWidget], {
         // DemoWidget code goes here
 
-        //please note that this property is be set by the framework when widget is loaded.
-        //templateString: template,
+        // please note that this property is be set by the framework when widget is loaded.
+        // templateString: template,
 
         baseClass: 'jimu-widget-demo',
         
@@ -112,95 +127,44 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
             console.log('startup');
             
             this.inherited(arguments);
-            this.map.setInfoWindowOnClick(false); // turn off info window (popup) when clicking a feature
+            // this.map.setInfoWindowOnClick(false); // turn off info window (popup) when clicking a feature
             
-            //Widen the widget panel to provide more space for charts
-            //var panel = this.getPanel();
-            //var pos = panel.position;
-            //pos.width = 500;
-            //panel.setPosition(pos);
-            //panel.panelManager.normalizePanel(panel);
+            // Widen the widget panel to provide more space for charts
+            // var panel = this.getPanel();
+            // var pos = panel.position;
+            // pos.width = 500;
+            // panel.setPosition(pos);
+            // panel.panelManager.normalizePanel(panel);
             
-            var parent = this;
+            wSG = this;
 
-            //when zoom finishes run changeZoom to update label display
+            // when zoom finishes run changeZoom to update label display
             this.map.on("zoom-end", function (){    
-                parent.changeZoom();    
+                wSG._changeZoom();    
             });    
 
 
-            for (_display in dDisplayOptions) {
-                for (_mode in dModeOptions) {
-                    for (_category in dCategoryOptions) {
-                        _name = dDisplayOptions[_display]['value'] + "_" + dModeOptions[_mode]['value'] + '_' + dCategoryOptions[_category]['value'];
-                        sDispLayers.push(_name);
-                    }
-                }
-            }
-
-            //setup json data for chart for only
-            for (_chartx in dChartX) {
-                for (_mode in dModeOptions) {
-                    for (_category in dCategoryOptions) {
-                        _name = "YEAR_" + dChartX[_chartx] + "_" + dModeOptions[_mode]['value'] + '_' + dCategoryOptions[_category]['value'];
-                        //Populate chartdata array of objects
-                        dojo.xhrGet({
-                            url: "widgets/ATOSidebar/data/" + _name + ".json",
-                            jname        : _name,
-                            jyear        : dChartX[_chartx],
-                            jmode        : dModeOptions[_mode]['value'],
-                            jcategory: dCategoryOptions[_category]['value'],
-                            handleAs: "json",
-                            load: function(obj,getdetails) {
-                                    /* here, obj will already be a JS object deserialized from the JSON response */
-                                    //chartkey.push([{ jname: getdetails.args['jname'], jyear: getdetails.args['jyear'], jmode: getdetails.args['jmode'], category: getdetails.args['jcategory']}]);
-                                    chartkey.push(getdetails.args['jname']);
-                                    chartdata.push(obj);
-                            },
-                            error: function(err) {
-                                    /* this will execute if the response couldn't be converted to a JS object,
-                                            or if the request was unsuccessful altogether. */
-                            }
-                        });
-                    }
-                }
-            }
-            
-            
-            //Initialize Selection Layer, FromLayer, and ToLayer and define selection colors
-            var layerInfosObject = LayerInfos.getInstanceSync();
-            for (var j=0, jl=layerInfosObject._layerInfos.length; j<jl; j++) {
-                var currentLayerInfo = layerInfosObject._layerInfos[j];        
-                if (currentLayerInfo.title == sAreasLayer) { //must mach layer title
-                    lyrAreas = layerInfosObject._layerInfos[j].layerObject;
-                } else if (currentLayerInfo.title == sTAZLayer) {
-                    lyrTAZ = layerInfosObject._layerInfos[j].layerObject;
-                }
-            }
-
-            //populate arrays of layers for display
-            for (s in sDispLayers) {
-                var layerInfosObject = LayerInfos.getInstanceSync();
-                for (var j=0, jl=layerInfosObject._layerInfos.length; j<jl; j++) {
-                    var currentLayerInfo = layerInfosObject._layerInfos[j];        
-                    if (currentLayerInfo.title == sDispLayersP + (sDispLayers[s]).replace(/_/g, ' ')) { //must mach layer title
-                        //push layer into array
-                        lyrDispLayers.push(layerInfosObject._layerInfos[j].layerObject);
-                    }
-                }
-            }
-
-            //Populate BinData Object
+            // Get Special Generators
             dojo.xhrGet({
-                url: "widgets/ATOSidebar/data/bindata.json",
+                url: "widgets/SpecialGenerators/data/specgen.json",
                 handleAs: "json",
                 load: function(obj) {
-                        /* here, obj will already be a JS object deserialized from the JSON response */
-                        console.log('bindata.json');
-                        bindata = obj;
-                        _CurDisplayItem = dDisplayOptions.filter( function(dDisplayOptions){return (dDisplayOptions['value']==curDisplay);} );
-                        parent.setLegendBar(_CurDisplayItem[0]['label']);
-                        parent.updateDisplayLayer();
+                    /* here, obj will already be a JS object deserialized from the JSON response */
+                    console.log('specgen.json');
+                    specgen = obj;
+                    cmbSpecGen = new Select({
+                        id: "selectSpecGen",
+                        name: "selectSpecGenName",
+                        options: specgen,
+                        onChange: function(){
+                            curSpecGen = this.value;
+                            wSG._panToSpecGen();
+                            wSG._updateDisplayLayer();
+                        }
+                    }, "cmbSpecGen");
+                    cmbSpecGen.startup();
+                    cmbSpecGen.set("value",sSpecGen);
+                    wSG._initializeDisplayLayers();
                 },
                 error: function(err) {
                         /* this will execute if the response couldn't be converted to a JS object,
@@ -208,69 +172,94 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                 }
             });
 
-            //Populate AverageValues Object
-            dojo.xhrGet({
-                url: "widgets/ATOSidebar/data/averagevalues.json",
-                handleAs: "json",
-                load: function(obj) {
-                        /* here, obj will already be a JS object deserialized from the JSON response */
-                        console.log('averagevalues.json');
-                        averagevalues = obj;
-                },
-                error: function(err) {
-                        /* this will execute if the response couldn't be converted to a JS object,
-                                or if the request was unsuccessful altogether. */
-                }
-            });
-
-
-            cmbMode = new Select({
-                id: "selectMode",
-                name: "selectModeName",
-                options: dModeOptions,
+            // Map display zones
+            var _cmbMapDisplayZone = new Select({
+                id: "selectMapDisplayZone",
+                name: "selectMapDisplayZoneName",
+                options: dMapDisplayZones,
                 onChange: function(){
-                    curMode = this.value;
-                    parent.updateDisplayLayer();
-                    parent.setLegendBar();
-                    parent.updateChart();
-                    parent.updateShed();
-                    //parent.loadJsonData();
+                    curMapDisp = this.value;
+                    wSG._updateDisplayLayer();
                 }
-                }, "cmbMode");
-            curMode = "AUTO";
-            cmbMode.startup();
+            }, "cmbMapDisplayZone");
+            _cmbMapDisplayZone.startup();
+            _cmbMapDisplayZone.set("value",sMapDisp);
 
+            // create radio buttons for both display of labels and symbology
+            wSG._createRadioButtons(dVolumeOrPercent,"divVolumeOrPercentSection"     ,"vol_per"      , sVol_Per      );
+            wSG._createRadioButtons(dVolumeOrPercent,"divVolumeOrPercentLabelSection","vol_per_label", sVol_Per_Label);
 
+            // Get DayType
+            dojo.xhrGet({
+                url: "widgets/SpecialGenerators/data/codes_daytype.json",
+                handleAs: "json",
+                load: function(obj) {
+                    /* here, obj will already be a JS object deserialized from the JSON response */
+                    console.log('codes_daytype.json');
+                    daytype = obj;
+                    wSG._createRadioButtons(daytype,"divDayTypeSection","daytype",sDayType);
+                },
+                error: function(err) {
+                        /* this will execute if the response couldn't be converted to a JS object,
+                                or if the request was unsuccessful altogether. */
+                }
+            });
+            // Get DataPer
+            dojo.xhrGet({
+                url: "widgets/SpecialGenerators/data/codes_dataper.json",
+                handleAs: "json",
+                load: function(obj) {
+                    /* here, obj will already be a JS object deserialized from the JSON response */
+                    console.log('codes_dataper.json');
+                    dataper = obj;
+                    wSG._createRadioButtons(dataper,"divDataPerSection","dataper",sDataPer);
+                },
+                error: function(err) {
+                        /* this will execute if the response couldn't be converted to a JS object,
+                                or if the request was unsuccessful altogether. */
+                }
+            });
+            // Get DayParts
+            dojo.xhrGet({
+                url: "widgets/SpecialGenerators/data/codes_daypart.json",
+                handleAs: "json",
+                load: function(obj) {
+                    /* here, obj will already be a JS object deserialized from the JSON response */
+                    console.log('codes_daypart.json');
+                    daypart = obj;
+                    wSG._createRadioButtons(daypart,"divDayPartSection","daypart",sDayPart);
+                },
+                error: function(err) {
+                        /* this will execute if the response couldn't be converted to a JS object,
+                                or if the request was unsuccessful altogether. */
+                }
+            });
 
+            // Populate BinData Object
+            dojo.xhrGet({
+                url: "widgets/SpecialGenerators/data/bindata.json",
+                handleAs: "json",
+                load: function(obj) {
+                    /* here, obj will already be a JS object deserialized from the JSON response */
+                    console.log('bindata.json');
+                    bindata = obj;
+                    // _CurDisplayItem = dDisplayOptions.filter( function(dDisplayOptions){return (dDisplayOptions['value']==curDisplay);} );
+                    // parent.setLegendBar(_CurDisplayItem[0]['label']);
+                    wSG._updateDisplayLayer();
+                },
+                error: function(err) {
+                    /* this will execute if the response couldn't be converted to a JS object,
+                        or if the request was unsuccessful altogether. */
+                }
+            });
 
-            // create a text symbol to define the style of labels
-            var volumeLabel = new TextSymbol();
-            volumeLabel.font.setSize("8pt");
-            volumeLabel.font.setFamily("arial");
-            volumeLabel.font.setWeight(Font.WEIGHT_BOLD);
-            volumeLabel.setHaloColor(sCWhite);
-            volumeLabel.setHaloSize(dHaloSize);
-
-            //Setup empty volume label class for when toggle is off
-            labelClassOff = ({
-                minScale: minScaleForLabels,
-                labelExpressionInfo: {expression: ""}
-            })
-            labelClassOff.symbol = volumeLabel;
-        
-            //Create a JSON object which contains the labeling properties. At the very least, specify which field to label using the labelExpressionInfo property. Other properties can also be specified such as whether to work with coded value domains, fieldinfos (if working with dates or number formatted fields, and even symbology if not specified as above)
-            labelClassOn = {
-                minScale: minScaleForLabels,
-                labelExpressionInfo: {expression: "$feature.LABEL"}
-            };
-            labelClassOn.symbol = volumeLabel;
-            
-            //Check box change events
+          
+            // Check box change events
             dom.byId("chkLabels").onchange = function(isChecked) {
-                parent.checkVolLabel();
+                wSG._checkLabel();
             };
             
-
+/*
             // Create the chart within it's "holding" node
             // Global so users can hit it from the console
             chartATO = new Chart("chartATO", {
@@ -345,7 +334,7 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                             {value: 2051, text: "2051"},
                             {value: 2052, text: "2052"}
                             ],
-                        //labels: [
+                        // labels: [
                         //                {value:2000, text:"2000"},
                         //                {value:2010, text:"2010"},
                         //                {value:2020, text:"2020"},
@@ -353,7 +342,7 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                         //                {value:2040, text:"2040"},
                         //                {value:2050, text:"2050"},
                         //            ],
-                        /*title: "Year",*/
+                        // title: "Year",
                         titleOrientation: "away",
                         titleFont: "normal normal normal 10pt Verdana",
                         titleGap: 10,
@@ -364,10 +353,12 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                 .addAxis("y",
                     {
                         vertical: true,
-                        min: 0/*,
-                        title : "AADT"*/
+                        min: 0// ,
+                        // title : "AADT"
                     }
                 )
+
+
 
             dChartLineTypes_TAZ = [
                 {stroke: {color: new Color([230,     0, 169, 0.9]), width: 1}, fill: new Color([230,     0, 169, 0.9])},
@@ -384,11 +375,6 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
             // Create the legend
             legendATO = new Legend({ chart: chartATO, horizontal: false }, "legendATO");
 
-
-            //initial functions to run
-            this.updateDisplayLayer();
-            this.changeZoom();
-
             new ToggleButton({
                 showLabel: true,
                 checked: false,
@@ -402,45 +388,161 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                 },
                 label: "OFF"
             }, "traveltoggle");
+*/
+
+            wSG._changeZoom();
 
         },
 
+        _initializeDisplayLayers: function(){
+            console.log('_initializeDisplayLayers');
+
+            for (_specgen in specgen) {
+                for (_mapdisp in dMapDisplayZones) {
+                    _name = specgen[_specgen]['value'] + "_gdb - "  + (specgen[_specgen]['value'] + " " + dMapDisplayZones[_mapdisp]['value']).replace(/_/g, ' ');
+                    sDispLayers.push(_name);
+                }
+            }
+
+            // Initialize Selection Layer, FromLayer, and ToLayer and define selection colors
+            var layerInfosObject = LayerInfos.getInstanceSync();
+            for (var j=0, jl=layerInfosObject._layerInfos.length; j<jl; j++) {
+                var currentLayerInfo = layerInfosObject._layerInfos[j];        
+                if (currentLayerInfo.title == sTAZLayer) {
+                    lyrTAZ = layerInfosObject._layerInfos[j].layerObject;
+                }
+            }
+            // populate arrays of layers for display
+            for (s in sDispLayers) {
+                var layerInfosObject = LayerInfos.getInstanceSync();
+                for (var j=0, jl=layerInfosObject._layerInfos.length; j<jl; j++) {
+                    var currentLayerInfo = layerInfosObject._layerInfos[j];        
+                    if (currentLayerInfo.title == (sDispLayers[s])) { // must mach layer title
+                        // push layer into array
+                        lyrDispLayers.push(layerInfosObject._layerInfos[j].layerObject);
+                    }
+                }
+            }
+            wSG._updateDisplayLayer();
+
+/*
+            // setup json data for chart for only
+            for (_chartx in dChartX) {
+                for (_mode in dModeOptions) {
+                    for (_category in dCategoryOptions) {
+                        _name = "YEAR_" + dChartX[_chartx] + "_" + dModeOptions[_mode]['value'] + '_' + dCategoryOptions[_category]['value'];
+                        // Populate chartdata array of objects
+                        dojo.xhrGet({
+                            url: "widgets/ATOSidebar/data/" + _name + ".json",
+                            jname        : _name,
+                            jyear        : dChartX[_chartx],
+                            jmode        : dModeOptions[_mode]['value'],
+                            jcategory: dCategoryOptions[_category]['value'],
+                            handleAs: "json",
+                            load: function(obj,getdetails) {
+                                    // here, obj will already be a JS object deserialized from the JSON response
+                                    // chartkey.push([{ jname: getdetails.args['jname'], jyear: getdetails.args['jyear'], jmode: getdetails.args['jmode'], category: getdetails.args['jcategory']}]);
+                                    chartkey.push(getdetails.args['jname']);
+                                    chartdata.push(obj);
+                            },
+                            error: function(err) {
+                                    // this will execute if the response couldn't be converted to a JS object,
+                                    //       or if the request was unsuccessful altogether.
+                            }
+                        });
+                    }
+                }
+            }
+*/            
+
+        },
+
+        _createRadioButtons: function(dData,sDiv,sName,sCheckedValue) {
+            console.log('_createRadioButtons');
+            
+            var _divRBDiv = dom.byId(sDiv);
+                  
+            for (d in dData) {
+        
+                // define if this is the radio button that should be selected
+                if (dData[d].value == sCheckedValue) {
+                    bChecked = true;
+                } else {
+                    bChecked = false;
+                }
+                
+                // radio button id
+                _rbID = "rb_" + sName + dData[d].value
+
+                // radio button object
+                var _rbRB = new RadioButton({ name:sName, label:dData[d].label, id:_rbID, value: dData[d].value, checked: bChecked});
+                _rbRB.startup();
+                _rbRB.placeAt(_divRBDiv);
+
+                // radio button label
+                var _lblRB = dojo.create('label', {
+                    innerHTML: dData[d].label,
+                    for: _rbID
+                }, _divRBDiv);
+                
+                // place radio button
+                dojo.place("<br/>", _divRBDiv);
+        
+                // Radio Buttons Change Event
+                dom.byId(_rbID).onchange = function(isChecked) {
+                    console.log("radio button onchange");
+                    if(isChecked) {
+                        _strValue = this.id.charAt(this.id.length - 1);
+                        // check which group radio button is in and assign cur value accordingly
+                        switch(this.name) {
+                            case 'daytype'      : curDayType       = _strValue; break;
+                            case 'dataper'      : curDataPer       = _strValue; break;
+                            case 'daypart'      : curDayPart       = _strValue; break;
+                            case 'vol_per'      : curVol_Per       = _strValue; break;
+                            case 'vol_per_label': curVol_Per_Label = _strValue; break;
+                        }
+                        wSG._updateRenderer();
+                    }
+                }
+            }
+        },
+
         updateChart: function() {
-            //get chart data for current area
+            // get chart data for current area
             
             var _seriesnames = [];
-            //var _xychartdatabyseries = [];
+            // var _xychartdatabyseries = [];
 
-            //Remove existing series
+            // Remove existing series
             while( chartATO.series.length > 0 ) {
                 chartATO.removeSeries(chartATO.series[0].name);
             }
             
             if (curTAZ!=0) {
 
-                //get chart data for selected TAZ
-                for (_series in dChartSeries) { //series is category
+                // get chart data for selected TAZ
+                for (_series in dChartSeries) { // series is category
 
-                    if (dChartSeries[_series]['category'] == curCategory) {//only show for current category
+                    if (dChartSeries[_series]['category'] == curCategory) {// only show for current category
                         
-                        //var _catlabeltaz    = "Accessible "                 + dChartSeries[_series]['label'] + " for TAZ " + curTAZ.toString();
+                        // var _catlabeltaz    = "Accessible "                 + dChartSeries[_series]['label'] + " for TAZ " + curTAZ.toString();
                         var _catlabeltaz    = "TAZ " + curTAZ.toString().substr(-4);
                         var _category = dChartSeries[_series]['category'];
-                        //_seriesnames.push(_catlabel);
+                        // _seriesnames.push(_catlabel);
                         var _xyseriesdatataz    = [];
                         for (_x in dChartX) {
                             _year         = dChartX[_x];
-                            //construct name of data
+                            // construct name of data
                             var _nametaz    = 'YEAR_' + _year.toString() + '_' + curMode + '_' + _category;
 
-                            //check key location for given name
+                            // check key location for given name
                             var _chartkeyloc = chartkey.indexOf(_nametaz);
 
-                            //get taz values
+                            // get taz values
                             if (_chartkeyloc >= 0) {
                                 var _chartdatafiltered = chartdata[_chartkeyloc]
                                 var _chartdatarecord = _chartdatafiltered.filter( function(_chartdatafiltered){return (_chartdatafiltered['Z']==curTAZ);} );
-                                //should only be one value
+                                // should only be one value
                                 _taz_value = _chartdatarecord[0]['V'];
                                 _xyseriesdatataz.push({x:_year,y:_taz_value});
                                 
@@ -453,15 +555,15 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                             }
 
                         }
-                        //_xychartdatabyseries.push(xyseriesdata);
+                        // _xychartdatabyseries.push(xyseriesdata);
                         chartATO.addSeries(_catlabeltaz , _xyseriesdatataz , dChartLineTypes_TAZ [_series]);
                     }
                 }
 
-                //get chart data for selected area
-                for (_series in dChartSeries) { //series is category
+                // get chart data for selected area
+                for (_series in dChartSeries) { // series is category
 
-                    if (dChartSeries[_series]['category'] == curCategory) { //only show for current category 
+                    if (dChartSeries[_series]['category'] == curCategory) { // only show for current category 
 
                         var _modedata    = dModeOptions.filter( function(dModeOptions){return (dModeOptions['value']==curMode);} );
 
@@ -470,20 +572,20 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                         var _max_yscale = _modedata[0]['max_yscale'];
                         var _ymajor         = _modedata[0]['ymajor'        ];
 
-                        //var _catlabelarea = "Average Accessible " + dChartSeries[_series]['label'] + " for " + this.getcurSpecGenName();
+                        // var _catlabelarea = "Average Accessible " + dChartSeries[_series]['label'] + " for " + this.getcurSpecGenName();
                         var _catlabelarea = "Average for " + this.getcurSpecGenName();
                         var _category = dChartSeries[_series]['category'];
-                        //_seriesnames.push(_catlabel);
+                        // _seriesnames.push(_catlabel);
                         var _xyseriesdataarea = [];
                         for (_x in dChartX) {
                             _year         = dChartX[_x];
-                            //construct name of data
+                            // construct name of data
                             var _namearea = 'YEAR_' + _year.toString() + '_' + curMode + '_' + _category + '_' + curSpecGen;
 
-                            //query area object
+                            // query area object
                             var _averagevaluesrecord = averagevalues.filter( function(averagevalues){return (averagevalues['Name']==_namearea);} );
                             
-                            //should only be one value
+                            // should only be one value
                             if (_averagevaluesrecord.length > 0) {
                                 _areavalue = _averagevaluesrecord[0]['Average'];
                                 _xyseriesdataarea.push({x:_year,y:_areavalue});
@@ -501,7 +603,7 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                                 }
                             }
                         }
-                        //_xychartdatabyseries.push(xyseriesdata);
+                        // _xychartdatabyseries.push(xyseriesdata);
                         chartATO.addSeries(_catlabelarea, _xyseriesdataarea, dChartLineTypes_Area[_series]);
                     }
 
@@ -510,9 +612,9 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                     chartATO.addAxis("y",
                     {
                         vertical: true,
-                        //fixLower: "major",
-                        //fixUpper: "major",
-                        //minorTickStep: 10,
+                        // fixLower: "major",
+                        // fixUpper: "major",
+                        // minorTickStep: 10,
                         majorTickStep: _ymajor,
                         min: 0,
                         max: _max_yscale/*,
@@ -521,7 +623,7 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
 
                 }
                 
-                ////Update Table
+                // // Update Table
 
                 dom.byId("taz_name").innerHTML = _catlabeltaz;
                 dom.byId("areaname").innerHTML = _catlabelarea;
@@ -531,20 +633,20 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                 dom.byId("rowname2050").innerHTML = "<p class = \"thicker\">Future (2050)</p>";
                 dom.byId("rownamenetg").innerHTML = "<p class = \"thicker\">Net Gain</p>";
 
-                dom.byId("taz_2019value").innerHTML = this.numberWithCommas(Math.round(_taz_2019value/100)*100);
-                dom.byId("taz_2050value").innerHTML = this.numberWithCommas(Math.round(_taz_2050value/100)*100);
-                dom.byId("taz_netgvalue").innerHTML = this.numberWithCommas(Math.round(_taz_netgvalue/100)*100);
-                dom.byId("area2019value").innerHTML = this.numberWithCommas(Math.round(_area2019value/100)*100);
-                dom.byId("area2050value").innerHTML = this.numberWithCommas(Math.round(_area2050value/100)*100);
-                dom.byId("areanetgvalue").innerHTML = this.numberWithCommas(Math.round(_areanetgvalue/100)*100);
+                dom.byId("taz_2019value").innerHTML = this._numberWithCommas(Math.round(_taz_2019value/100)*100);
+                dom.byId("taz_2050value").innerHTML = this._numberWithCommas(Math.round(_taz_2050value/100)*100);
+                dom.byId("taz_netgvalue").innerHTML = this._numberWithCommas(Math.round(_taz_netgvalue/100)*100);
+                dom.byId("area2019value").innerHTML = this._numberWithCommas(Math.round(_area2019value/100)*100);
+                dom.byId("area2050value").innerHTML = this._numberWithCommas(Math.round(_area2050value/100)*100);
+                dom.byId("areanetgvalue").innerHTML = this._numberWithCommas(Math.round(_areanetgvalue/100)*100);
                 dom.byId("pavg2019value").innerHTML = (100*_pavg2019value).toFixed(0) + "%";
                 dom.byId("pavg2050value").innerHTML = (100*_pavg2050value).toFixed(0) + "%";
                 dom.byId("pavgnetgvalue").innerHTML = (100*_pavgnetgvalue).toFixed(0) + "%";
 
-                //
-                //for (var i=0; i<tSSFor.data.length; i++) {
-                //    dom.byId("vol" + tSSFor.data[i].x + "value").innerHTML= this._NumberWithCommas(tSSFor.data[i].y);
-                //}
+                // 
+                // for (var i=0; i<tSSFor.data.length; i++) {
+                //    dom.byId("vol" + tSSFor.data[i].x + "value").innerHTML= this.__numberWithCommas(tSSFor.data[i].y);
+                // }
                 
                 if (dom.byId("traveltoggle").checked==false) {
                     dom.byId("chartAreaATO").style.display = '';
@@ -563,55 +665,67 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
 
             }
 
-            //if (curTAZ == 492092) {
-            //this.checkShed(true);
-            //} else {
+            // if (curTAZ == 492092) {
+            // this.checkShed(true);
+            // } else {
             //    this.checkShed(false);
-            //}
+            // }
 
         },
 
-        numberWithCommas: function(x) {
+        _numberWithCommas: function(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         },
 
-        updateRenderer: function() {
-            console.log('updateRenderer');
+        _updateRenderer: function() {
+            console.log('_updateRenderer');
 
             if (typeof bindata !== 'undefined') {
 
-                curLayer = this.getCurDispLayerLoc();
-                curBin = sFNATOBinP + curSpecGen
+                curLayer = this._getCurDispLayerLoc();
 
-                //create renderer for display layers
-                var defaultLine =    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, Color.fromHex(sCDefaultGrey), 1) 
-                
-                //initialize renderer with field name for current bin based on current area
-                var _Rndr = new UniqueValueRenderer(null, curBin);
-                            
-                for (var i=0; i<bindata.length; i++) {
-                    _Rndr.addValue({value: i,     symbol: new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, defaultLine, Color.fromHex(bindata[i].Color)), label: bindata[i].Description});
+                var _defaultLine;
+                // create renderer for display layers
+                switch(curMapDisp) {
+                    case 'CO_TAZID': defaultLine =    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, Color.fromHex(sCDefaultGrey), 0.5) ; break;
+                    case 'DISTMED' : defaultLine =    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, Color.fromHex(sCDefaultGrey), 3.0) ; break;
+                    case 'DISTLRG' : defaultLine =    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, Color.fromHex(sCDefaultGrey), 3.0) ; break;
                 }
+                
+                
+                // construct field name
+                _fieldname =  wSG._getDisplayFieldName();
+
+                // initialize renderer with field name for current bin based on current area
+                var _Rndr = new ClassBreaksRenderer(null, _fieldname);
+                
+                for (var i=1; i<=9; i++) {
+                    _id = curMapDisp + '_' + curVol_Per + '_' + i.toString();
+                    _Rndr.addBreak({minValue: bindata[_id].minValue, maxValue: bindata[_id].maxValue,     symbol: new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, defaultLine, Color.fromHex(bindata[_id].Color)), label: bindata[_id].Description});
+                }
+
                 if (curLayer >= 0) {
                     lyrDispLayers[curLayer].setRenderer(_Rndr);
                     lyrDispLayers[curLayer].setOpacity(0.65);
                     lyrDispLayers[curLayer].refresh();
                 }
+
+                wSG._changeZoom();
+                wSG._checkLabel();
             }
 
         },
 
-        getcurSpecGenName: function() {
-            var _curSpecGenName = dAreaOptions.filter( function(dAreaOptions){return (dAreaOptions['value']==curSpecGen);} );
-            return _curSpecGenName[0]['name'];
+        _getDisplayFieldName: function() {
+            return curVol_Per.toLowerCase() + '_' + curDayType + curDayPart + curDataPer;
         },
 
-        getCurShed: function() {
-            var _curShed = dDisplayOptions.filter( function(dDisplayOptions){return (dDisplayOptions['value']==curDisplay);} );
-            return _curShed[0]['shed'];
+        _getLabelFieldName: function() {
+            return curVol_Per_Label.toLowerCase() + '_' + curDayType + curDayPart + curDataPer;
         },
-        getCurDispLayerLoc: function() {
-            _curLayerName = sDispLayersP + (curDisplay + "_" + curMode + "_" + curCategory).replace(/_/g, ' ');
+
+        _getCurDispLayerLoc: function() {
+            _curLayerName = curSpecGen + "_gdb - "  + (curSpecGen + " " + curMapDisp).replace(/_/g, ' ');
             for (l in lyrDispLayers) {
                 if (lyrDispLayers[l].arcgisProps.title == _curLayerName)
                     return l;
@@ -619,21 +733,20 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
             return -1;
         },
 
-        hideAllDispLayers: function() {
+        _hideAllDispLayers: function() {
             for (l in lyrDispLayers) {
                 lyrDispLayers[l].hide();
             }
         },
 
-        updateDisplayLayer: function() {
-            console.log('updateDisplayLayer');
-            this.hideAllDispLayers();
-            if (curDisplay != '' && curMode != '' && curCategory != '') {
-                this.updateRenderer();
-                var _loc = this.getCurDispLayerLoc()
+        _updateDisplayLayer: function() {
+            console.log('_updateDisplayLayer');
+            wSG._hideAllDispLayers();
+            if (curSpecGen != '' && curMapDisp != '' && curDayType != '' && curDataPer != '' && curDayPart != '') {
+                wSG._updateRenderer();
+                var _loc = wSG._getCurDispLayerLoc()
                 if (_loc >= 0) {
                     lyrDispLayers[_loc].show();
-                    this.checkVolLabel();
                 }
             }
         },
@@ -641,7 +754,7 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
         loadJsonData: function() {
             console.log('loadJsonData');
             parent = this;
-            //Populate ATO datastore
+            // Populate ATO datastore
             lyrTAZ.hide();
             dojo.xhrGet({
                 url: "widgets/ATOSidebar/data/" + curDisplay + "_" + curMode + "_" + curCategory + "_" + curSpecGen + ".json",
@@ -651,16 +764,16 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                         console.log('forecasts.json');
                         ato = obj;
                         parent.updateATOLayer();
-                        //Populate dowFactors DataStore
-                        //storeATO = Observable(new Memory({
+                        // Populate dowFactors DataStore
+                        // storeATO = Observable(new Memory({
                         //    data: {
                         //        identifier: "Z",
                         //        label: "V",
                         //        items: ato
                         //    }
-                        //}));
-                        //parent.UpdateCCSs(curSiteGroup);
-                        //parent.UpdateChart();
+                        // }));
+                        // parent.UpdateCCSs(curSiteGroup);
+                        // parent.UpdateChart();
                 },
                 error: function(err) {
                         /* this will execute if the response couldn't be converted to a JS object,
@@ -687,12 +800,12 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
             }
         },
 
-        showLegend: function(){
-            console.log('showLegend');
+        _showLegend: function(){
+            console.log('_showLegend');
             var pm = PanelManager.getInstance();
             var bOpen = false;
             
-            //Close Legend Widget if open
+            // Close Legend Widget if open
             for (var p=0; p < pm.panels.length; p++) {
                 if (pm.panels[p].label == "Legend") {
                     if (pm.panels[p].state != "closed") {
@@ -703,36 +816,32 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
             }
         
             if (!bOpen) {
-                //pm.showPanel(this.appConfig.widgetOnScreen.widgets[WIDGETPOOLID_LEGEND]);
+                // pm.showPanel(this.appConfig.widgetOnScreen.widgets[WIDGETPOOLID_LEGEND]);
             }
         },
 
-        zoomToSpecGen: function() {
-            console.log('zoomToArea');
-            if (dom.byId("chkAutoZoom").checked == true) {
+        _panToSpecGen: function() {
+            console.log('_panToSpecGen');
+            if (dom.byId("chkAutoPan").checked == true) {
                 
-                var refID = this.label;
-                
-                queryTask = new esri.tasks.QueryTask(lyrAreas.url);
+                queryTask = new esri.tasks.QueryTask(lyrTAZ.url);
                 
                 query = new esri.tasks.Query();
                 query.returnGeometry = true;
                 query.outFields = ["*"];
-                query.where = "SpecGen = '" + curSpecGen + "'";
+                query.where = sFNSGTAZID + "='" + wSG._getCurSpecGenTAZID() + "' AND SUBAREAID=1"; // ONLY SETUP FOR WASATCH FRONT AREA
                 
                 queryTask.execute(query, showResults);
-                
-                parent = this;
                 
                 function showResults(featureSet) {
                     
                     var feature, featureId;
                     
-                    //QueryTask returns a featureSet.    Loop through features in the featureSet and add them to the map.
+                    // QueryTask returns a featureSet.    Loop through features in the featureSet and add them to the map.
                     
                     if (featureSet.features[0].geometry.type == "polyline" || featureSet.features[0].geometry.type == "polygon") { 
-                        //clearing any graphics if present. 
-                        parent.map.graphics.clear(); 
+                        // clearing any graphics if present. 
+                        wSG.map.graphics.clear(); 
                         newExtent = new Extent(featureSet.features[0].geometry.getExtent()) 
                             for (i = 0; i < featureSet.features.length; i++) { 
                                 var graphic = featureSet.features[i]; 
@@ -740,34 +849,86 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
 
                                 // making a union of extent or previous feature and current feature. 
                                 newExtent = newExtent.union(thisExtent); 
-                                //graphic.setSymbol(sfs); 
+                                var _sfs = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+                                    new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASHDOT,
+                                    new Color([255,0,0]), 2),new Color([255,255,0,0.25])
+                                );
+                                graphic.setSymbol(_sfs); 
                                 //graphic.setInfoTemplate(popupTemplate); 
-                                parent.map.graphics.add(graphic); 
+                                wSG.map.graphics.add(graphic); 
                             } 
-                        parent.map.setExtent(newExtent.expand(1.35)); 
+
+                        // zoom to new extent
+                        //wSG.map.setExtent(newExtent.expand(1.5)); 
+
+                        // pan to center of TAZ
+                        wSG.map.centerAt(newExtent.getCenter()); //recenters the map based on a map coordinate.
+
                     }
                 }
             }
         },
 
-        changeZoom: function(){
-            console.log('changeZoom');
-            dScale = this.map.getScale();
-            if (dScale < minScaleForLabels) {
-                //enable the checkbox
-                dom.byId("ATO_Labels").style.display = "inline";
+        _getCurSpecGenTAZID: function() {
+            _curSGData = specgen.filter( function(specgen){return (specgen['value']==curSpecGen);} );
+            return _curSGData[0][sFNSGTAZID]; 
+        },
+
+        _changeZoom: function(){
+            console.log('_changeZoom');
+            dScale = wSG.map.getScale();
+            if (dScale < wSG._getMinScaleForLabels()) {
+                // enable the checkbox
+                dom.byId("SG_Labels").style.display = "inline";
             } else {
-                //diable the checkbox
-                dom.byId("ATO_Labels").style.display = 'none';
+                // diable the checkbox
+                dom.byId("SG_Labels").style.display = 'none';
             }
         },
 
-        checkVolLabel: function() {
-            console.log('checkVolLabel');
+        _getMinScaleForLabels: function() {
+            _curMapDisplayZone = dMapDisplayZones.filter( function(dMapDisplayZones){return (dMapDisplayZones['value']==curMapDisp);} );
+            return _curMapDisplayZone[0]['minScaleForLabels']; 
+        },
+
+        _checkLabel: function() {
+            console.log('_checkLabel');
+
+            // create a text symbol to define the style of labels
+            var volumeLabel = new TextSymbol();
+            volumeLabel.font.setSize("8pt");
+            volumeLabel.font.setFamily("arial");
+            volumeLabel.font.setWeight(Font.WEIGHT_BOLD);
+            volumeLabel.setHaloColor(sCWhite);
+            volumeLabel.setHaloSize(dHaloSize);
+
+            // Setup empty volume label class for when toggle is off
+            labelClassOff = ({
+                minScale: wSG._getMinScaleForLabels(),
+                labelExpressionInfo: {expression: ""}
+            })
+            labelClassOff.symbol = volumeLabel;
+        
+            _exp = "";
+
+            if (curVol_Per_Label == 'P') {
+                _exp = "Text($feature[\"" + wSG._getLabelFieldName() + "\"],'#.00%')";
+            } else if (curVol_Per_Label == 'V') {
+                _exp = "Text($feature[\"" + wSG._getLabelFieldName() + "\"],'#,##0')";
+            }
+
+            // Create a JSON object which contains the labeling properties. At the very least, specify which field to label using the labelExpressionInfo property. Other properties can also be specified such as whether to work with coded value domains, fieldinfos (if working with dates or number formatted fields, and even symbology if not specified as above)
+            labelClassOn = {
+                minScale: wSG._getMinScaleForLabels(),
+                labelExpression: "[" + wSG._getLabelFieldName() + "]",
+                labelExpressionInfo: {expression: _exp}
+            };
+            labelClassOn.symbol = volumeLabel;
+           
             if (dom.byId("chkLabels").checked == true) {
-                lyrDispLayers[this.getCurDispLayerLoc()].setLabelingInfo([ labelClassOn    ] );
+                lyrDispLayers[wSG._getCurDispLayerLoc()].setLabelingInfo([ labelClassOn ]);
             } else {
-                lyrDispLayers[this.getCurDispLayerLoc()].setLabelingInfo([ labelClassOff ]);
+                lyrDispLayers[wSG._getCurDispLayerLoc()].setLabelingInfo([ labelClassOff]);
             }
             
         },
@@ -777,7 +938,7 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
         },
 
         onClose: function(){
-            //this.ClickClearButton();
+            // this.ClickClearButton();
             console.log('onClose');
         },
 
@@ -798,16 +959,16 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
             console.log('onSignOut');
         },
 
-        //added from Demo widget Setting.js
+        // added from Demo widget Setting.js
         setConfig: function(config){
-            //this.textNode.value = config.districtfrom;
+            // this.textNode.value = config.districtfrom;
         var test = "";
         },
 
         getConfigFrom: function(){
-            //WAB will get config object through this method
+            // WAB will get config object through this method
             return {
-                //districtfrom: this.textNode.value
+                // districtfrom: this.textNode.value
             };
         }
 

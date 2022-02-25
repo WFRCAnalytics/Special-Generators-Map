@@ -1,0 +1,406 @@
+,SpecGen,daytype_code,daypart_code,dataper_code,Volume,Counts,day_type,day_part,data_period
+0,Airport,0,0,1,67148.74520544933,845148,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+1,BYU,0,0,1,56647.805479431205,712981,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+2,ENSIGN,0,0,1,3786.12876712357,47653,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+3,Lagoon,0,0,1,10080.161643836449,126871,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+4,SLCC_AIRP,0,0,1,11692.720547945968,147167,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+5,SLCC_HL,0,0,1,5906.3068493149985,74338,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+6,SLCC_HM,0,0,1,11073.709589041819,139376,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+7,SLCC_JD,0,0,1,4097.263013698956,51569,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+8,SLCC_LB,0,0,1,2294.7342465753018,28882,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+9,SLCC_MEAD,0,0,1,2254.690410958876,28378,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+10,SLCC_ML,0,0,1,5747.72054794505,72342,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+11,SLCC_SC,0,0,1,8337.936986301076,104943,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+12,SLCC_TL,0,0,1,12404.293150686002,156123,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+13,SLCC_WEST,0,0,1,3725.824657534488,46894,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+14,SLC_Library,0,0,1,2294.7342465753018,28882,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+15,TempleSquare,0,0,1,13507.723287671997,170011,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+16,UOFU_MAIN,0,0,1,39229.84931505125,493755,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+17,UOFU_MED,0,0,1,31531.42191780543,396861,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+18,UVU_GENEVA,0,0,1,10375.723287673436,130591,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+19,UVU_MAIN,0,0,1,29848.786301366097,375683,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+20,UVU_PAYSON,0,0,1,648.5671232876582,8163,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+21,UVU_THANKP,0,0,1,4194.43287671257,52792,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+22,UVU_VINE,0,0,1,367.6246575342457,4627,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+23,WESTMIN,0,0,1,3526.4000000002206,44384,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+24,WSU_DAVIS,0,0,1,13447.419178082888,169252,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+25,WSU_OGDEN,0,0,1,17219.405479455476,216727,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+26,WSU_WEST,0,0,1,6845.430136986219,86158,0: All Days (Mo-Su),0: All Day (12am-12am),1. All year
+27,Airport,1,0,1,69543.29299365862,376493,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+28,BYU,1,0,1,68985.8280255055,373475,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+29,ENSIGN,1,0,1,5241.796178344188,28378,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+30,Lagoon,1,0,1,6754.229299363393,36566,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+31,SLCC_AIRP,1,0,1,15160.904458598938,82078,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+32,SLCC_HL,1,0,1,6642.292993630781,35960,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+33,SLCC_HM,1,0,1,11225.955414013004,60775,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+34,SLCC_JD,1,0,1,5870.191082802838,31780,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+35,SLCC_LB,1,0,1,2340.318471337612,12670,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+36,SLCC_MEAD,1,0,1,2896.6751592355977,15682,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+37,SLCC_ML,1,0,1,8033.738853503849,43493,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+38,SLCC_SC,1,0,1,10067.063694268018,54501,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+39,SLCC_TL,1,0,1,16721.547770700625,90527,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+40,SLCC_WEST,1,0,1,5263.407643312324,28495,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+41,SLC_Library,1,0,1,2340.318471337612,12670,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+42,TempleSquare,1,0,1,14185.617834395092,76798,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+43,UOFU_MAIN,1,0,1,48427.59872612037,262177,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+44,UOFU_MED,1,0,1,39973.82165605877,216410,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+45,UVU_GENEVA,1,0,1,11552.343949045433,62542,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+46,UVU_MAIN,1,0,1,40819.4394904525,220988,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+47,UVU_PAYSON,1,0,1,716.3184713375624,3878,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+48,UVU_THANKP,1,0,1,5128.936305732728,27767,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+49,UVU_VINE,1,0,1,452.1783439490346,2448,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+50,WESTMIN,1,0,1,4149.401273885293,22464,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+51,WSU_DAVIS,1,0,1,15847.668789809206,85796,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+52,WSU_OGDEN,1,0,1,21953.369426746624,118851,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+53,WSU_WEST,1,0,1,7171.866242038381,38827,1: Weekday (Tu-Th),0: All Day (12am-12am),1. All year
+54,Airport,2,0,1,58929.11538460918,211332,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+55,BYU,2,0,1,31506.2692307752,112988,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+56,ENSIGN,2,0,1,1274.8846153846516,4572,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+57,Lagoon,2,0,1,15193.490384614344,54487,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+58,SLCC_AIRP,2,0,1,5319.269230768781,19076,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+59,SLCC_HL,2,0,1,4211.971153846232,15105,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+60,SLCC_HM,2,0,1,10665.028846152965,38247,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+61,SLCC_JD,2,0,1,1672.7980769231172,5999,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+62,SLCC_LB,2,0,1,2305.2211538462734,8267,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+63,SLCC_MEAD,2,0,1,618.7596153846042,2219,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+64,SLCC_ML,2,0,1,1600.298076923144,5739,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+65,SLCC_SC,2,0,1,5419.653846153498,19436,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+66,SLCC_TL,2,0,1,5929.942307691556,21266,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+67,SLCC_WEST,2,0,1,1293.5673076923333,4639,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+68,SLC_Library,2,0,1,2305.2211538462734,8267,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+69,TempleSquare,2,0,1,11588.009615383544,41557,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+70,UOFU_MAIN,2,0,1,20751.730769230984,74420,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+71,UOFU_MED,2,0,1,13424.769230765489,48144,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+72,UVU_GENEVA,2,0,1,7939.028846152829,28471,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+73,UVU_MAIN,2,0,1,10083.07692307348,36160,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+74,UVU_PAYSON,2,0,1,538.1730769230714,1930,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+75,UVU_THANKP,2,0,1,1873.2884615385112,6718,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+76,UVU_VINE,2,0,1,220.28846153846422,790,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+77,WESTMIN,2,0,1,2258.6538461539376,8100,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+78,WSU_DAVIS,2,0,1,8729.278846153056,31305,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+79,WSU_OGDEN,2,0,1,7912.817307690928,28377,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+80,WSU_WEST,2,0,1,6255.355769230464,22433,2: Weekend Day (Sa-Su),0: All Day (12am-12am),1. All year
+486,Airport,0,0,2,61246.406593413005,192187,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+487,BYU,0,0,2,72538.56043956481,227621,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+488,ENSIGN,0,0,2,4056.8131868131154,12730,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+489,Lagoon,0,0,2,9047.362637362503,28390,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+490,SLCC_AIRP,0,0,2,11504.395604395742,36100,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+491,SLCC_HL,0,0,2,5750.923076922969,18046,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+492,SLCC_HM,0,0,2,12126.780219780447,38053,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+493,SLCC_JD,0,0,2,5227.648351648251,16404,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+494,SLCC_LB,0,0,2,2138.989010988987,6712,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+495,SLCC_MEAD,0,0,2,2392.021978021949,7506,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+496,SLCC_ML,0,0,2,6270.054945054667,19675,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+497,SLCC_SC,0,0,2,8840.219780219599,27740,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+498,SLCC_TL,0,0,2,13832.043956044257,43404,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+499,SLCC_WEST,0,0,2,3977.4615384614845,12481,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+500,SLC_Library,0,0,2,2138.989010988987,6712,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+501,TempleSquare,0,0,2,13021.95604395622,40862,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+502,UOFU_MAIN,0,0,2,51235.03296703707,160772,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+503,UOFU_MED,0,0,2,32204.02197802233,101054,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+504,UVU_GENEVA,0,0,2,11430.142857143133,35867,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+505,UVU_MAIN,0,0,2,37091.95604395702,116392,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+506,UVU_PAYSON,0,0,2,619.8351648351683,1945,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+507,UVU_THANKP,0,0,2,3943.0439560439077,12373,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+508,UVU_VINE,0,0,2,558.9670329670363,1754,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+509,WESTMIN,0,0,2,3851.9010989010526,12087,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+510,WSU_DAVIS,0,0,2,16025.846153846422,50288,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+511,WSU_OGDEN,0,0,2,24059.483516483822,75497,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+512,WSU_WEST,0,0,2,7108.186813186725,22305,0: All Days (Mo-Su),0: All Day (12am-12am),2. Sep-Nov
+513,Airport,1,0,2,64005.97435896551,86077,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+514,BYU,1,0,2,89076.10256409655,119792,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+515,ENSIGN,1,0,2,5703.333333333441,7670,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+516,Lagoon,1,0,2,2764.6666666666974,3718,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+517,SLCC_AIRP,1,0,2,15189.307692307944,20427,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+518,SLCC_HL,1,0,2,6432.05128205138,8650,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+519,SLCC_HM,1,0,2,12391.179487179636,16664,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+520,SLCC_JD,1,0,2,7847.84615384625,10554,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+521,SLCC_LB,1,0,2,2385.4358974359284,3208,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+522,SLCC_MEAD,1,0,2,3143.897435897484,4228,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+523,SLCC_ML,1,0,2,8783.2820512823,11812,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+524,SLCC_SC,1,0,2,11317.435897436204,15220,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+525,SLCC_TL,1,0,2,19432.9743589748,26134,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+526,SLCC_WEST,1,0,2,5740.512820512913,7720,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+527,SLC_Library,1,0,2,2385.4358974359284,3208,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+528,TempleSquare,1,0,2,13500.615384615701,18156,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+529,UOFU_MAIN,1,0,2,61018.230769222224,82059,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+530,UOFU_MED,1,0,2,41509.41025640645,55823,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+531,UVU_GENEVA,1,0,2,12899.051282051627,17347,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+532,UVU_MAIN,1,0,2,51653.461538455886,69465,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+533,UVU_PAYSON,1,0,2,736.8974358974333,991,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+534,UVU_THANKP,1,0,2,4887.615384615463,6573,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+535,UVU_VINE,1,0,2,777.7948717948696,1046,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+536,WESTMIN,1,0,2,4591.666666666721,6175,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+537,WSU_DAVIS,1,0,2,19575.743589743775,26326,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+538,WSU_OGDEN,1,0,2,31028.51282051384,41728,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+539,WSU_WEST,1,0,2,7513.2307692308295,10104,1: Weekday (Tu-Th),0: All Day (12am-12am),2. Sep-Nov
+540,Airport,2,0,2,53059.96153845581,47571,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+541,BYU,2,0,2,40026.6923076886,35886,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+542,ENSIGN,2,0,2,1423.2307692307666,1276,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+543,Lagoon,2,0,2,18204.192307692538,16321,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+544,SLCC_AIRP,2,0,2,4911.038461538508,4403,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+545,SLCC_HL,2,0,2,4138.076923076941,3710,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+546,SLCC_HM,2,0,2,11876.615384615543,10648,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+547,SLCC_JD,2,0,2,1913.9999999999948,1716,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+548,SLCC_LB,2,0,2,1961.96153846153,1759,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+549,SLCC_MEAD,2,0,2,640.2307692307741,574,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+550,SLCC_ML,2,0,2,1811.3846153846014,1624,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+551,SLCC_SC,2,0,2,4695.76923076928,4210,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+552,SLCC_TL,2,0,2,5251.230769230831,4708,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+553,SLCC_WEST,2,0,2,1238.0769230769245,1110,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+554,SLC_Library,2,0,2,1961.96153846153,1759,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+555,TempleSquare,2,0,2,11732.730769231144,10519,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+556,UOFU_MAIN,2,0,2,34127.42307691991,30597,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+557,UOFU_MED,2,0,2,13797.307692308439,12370,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+558,UVU_GENEVA,2,0,2,8663.192307692492,7767,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+559,UVU_MAIN,2,0,2,10580.538461538858,9486,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+560,UVU_PAYSON,2,0,2,496.3461538461552,445,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+561,UVU_THANKP,2,0,2,1828.115384615378,1639,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+562,UVU_VINE,2,0,2,228.65384615384588,205,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+563,WESTMIN,2,0,2,2443.8076923076915,2191,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+564,WSU_DAVIS,2,0,2,9438.384615384713,8462,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+565,WSU_OGDEN,2,0,2,11585.500000000384,10387,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+566,WSU_WEST,2,0,2,6440.2307692307995,5774,2: Weekend Day (Sa-Su),0: All Day (12am-12am),2. Sep-Nov
+972,Airport,0,0,3,66018.82222222924,204886,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+973,BYU,0,0,3,56324.122222226426,174799,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+974,ENSIGN,0,0,3,4090.2888888888647,12694,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+975,Lagoon,0,0,3,1393.2888888888842,4324,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+976,SLCC_AIRP,0,0,3,11043.522222222224,34273,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+977,SLCC_HL,0,0,3,5348.244444444353,16598,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+978,SLCC_HM,0,0,3,9730.144444444402,30197,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+979,SLCC_JD,0,0,3,4258.166666666629,13215,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+980,SLCC_LB,0,0,3,2181.766666666669,6771,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+981,SLCC_MEAD,0,0,3,2170.4888888888936,6736,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+982,SLCC_ML,0,0,3,5371.766666666479,16671,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+983,SLCC_SC,0,0,3,8398.722222221959,26065,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+984,SLCC_TL,0,0,3,12211.900000000192,37899,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+985,SLCC_WEST,0,0,3,3448.422222222198,10702,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+986,SLC_Library,0,0,3,2181.766666666669,6771,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+987,TempleSquare,0,0,3,14433.944444444665,44795,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+988,UOFU_MAIN,0,0,3,36845.14444444509,114347,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+989,UOFU_MED,0,0,3,29147.89999999957,90459,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+990,UVU_GENEVA,0,0,3,10142.911111111136,31478,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+991,UVU_MAIN,0,0,3,29685.366666666,92127,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+992,UVU_PAYSON,0,0,3,687.9444444444372,2135,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+993,UVU_THANKP,0,0,3,3857.322222222192,11971,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+994,UVU_VINE,0,0,3,336.39999999999895,1044,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+995,WESTMIN,0,0,3,3363.677777777766,10439,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+996,WSU_DAVIS,0,0,3,12751.62222222234,39574,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+997,WSU_OGDEN,0,0,3,16718.82222222282,51886,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+998,WSU_WEST,0,0,3,6475.0555555554865,20095,0: All Days (Mo-Su),0: All Day (12am-12am),3. Dec-Feb
+999,Airport,1,0,3,66911.69999999374,92292,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1000,BYU,1,0,3,68413.1749999965,94363,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1001,ENSIGN,1,0,3,5541.90000000002,7644,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1002,Lagoon,1,0,3,1703.0249999999912,2349,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1003,SLCC_AIRP,1,0,3,13664.800000000203,18848,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1004,SLCC_HL,1,0,3,5942.1000000000295,8196,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1005,SLCC_HM,1,0,3,9819.40000000013,13544,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1006,SLCC_JD,1,0,3,6103.775000000031,8419,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1007,SLCC_LB,1,0,3,2182.2499999999814,3010,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1008,SLCC_MEAD,1,0,3,2708.5999999999653,3736,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1009,SLCC_ML,1,0,3,7341.350000000133,10126,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1010,SLCC_SC,1,0,3,9805.62500000023,13525,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1011,SLCC_TL,1,0,3,16378.475000000344,22591,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1012,SLCC_WEST,1,0,3,4760.349999999979,6566,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1013,SLC_Library,1,0,3,2182.2499999999814,3010,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1014,TempleSquare,1,0,3,14405.75000000032,19870,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1015,UOFU_MAIN,1,0,3,46370.27499999656,63959,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1016,UOFU_MED,1,0,3,36020.89999999709,49684,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1017,UVU_GENEVA,1,0,3,11269.400000000356,15544,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1018,UVU_MAIN,1,0,3,40868.24999999728,56370,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1019,UVU_PAYSON,1,0,3,677.1500000000028,934,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1020,UVU_THANKP,1,0,3,4605.9249999999765,6353,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1021,UVU_VINE,1,0,3,363.2250000000004,501,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1022,WESTMIN,1,0,3,3958.499999999959,5460,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1023,WSU_DAVIS,1,0,3,15159.02500000017,20909,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1024,WSU_OGDEN,1,0,3,21681.124999999796,29905,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1025,WSU_WEST,1,0,3,6795.425000000032,9373,1: Weekday (Tu-Th),0: All Day (12am-12am),3. Dec-Feb
+1026,Airport,2,0,3,58386.280000005994,50333,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1027,BYU,2,0,3,32307.15999999866,27851,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1028,ENSIGN,2,0,3,1380.4000000000078,1190,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1029,Lagoon,2,0,3,556.8000000000005,480,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1030,SLCC_AIRP,2,0,3,5511.159999999933,4751,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1031,SLCC_HL,2,0,3,3769.9999999999936,3250,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1032,SLCC_HM,2,0,3,9235.919999999865,7962,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1033,SLCC_JD,2,0,3,1628.6400000000044,1404,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1034,SLCC_LB,2,0,3,2106.5600000000163,1816,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1035,SLCC_MEAD,2,0,3,590.4400000000016,509,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1036,SLCC_ML,2,0,3,1557.8800000000138,1343,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1037,SLCC_SC,2,0,3,5776.799999999878,4980,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1038,SLCC_TL,2,0,3,6170.039999999889,5319,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1039,SLCC_WEST,2,0,3,1372.2800000000038,1183,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1040,SLC_Library,2,0,3,2106.5600000000163,1816,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1041,TempleSquare,2,0,3,13015.199999999542,11220,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1042,UOFU_MAIN,2,0,3,17635.47999999908,15203,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1043,UOFU_MED,2,0,3,13033.759999999322,11236,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1044,UVU_GENEVA,2,0,3,7613.079999999864,6563,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1045,UVU_MAIN,2,0,3,10685.919999999585,9212,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1046,UVU_PAYSON,2,0,3,705.280000000001,608,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1047,UVU_THANKP,2,0,3,1723.7600000000077,1486,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1048,UVU_VINE,2,0,3,274.91999999999985,237,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1049,WESTMIN,2,0,3,1977.8000000000166,1705,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1050,WSU_DAVIS,2,0,3,7789.399999999934,6715,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1051,WSU_OGDEN,2,0,3,6386.959999999829,5506,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1052,WSU_WEST,2,0,3,5764.039999999969,4969,2: Weekend Day (Sa-Su),0: All Day (12am-12am),3. Dec-Feb
+1458,Airport,0,0,4,66128.51086955902,209787,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1459,BYU,0,0,4,57483.35869564696,182361,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1460,ENSIGN,0,0,4,3835.5652173913186,12168,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1461,Lagoon,0,0,4,7489.249999999823,23759,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1462,SLCC_AIRP,0,0,4,11582.978260869366,36746,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1463,SLCC_HL,0,0,4,6039.24999999992,19159,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1464,SLCC_HM,0,0,4,9914.847826086776,31454,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1465,SLCC_JD,0,0,4,4011.141304347849,12725,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1466,SLCC_LB,0,0,4,2310.228260869556,7329,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1467,SLCC_MEAD,0,0,4,2219.760869565199,7042,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1468,SLCC_ML,0,0,4,5717.728260869422,18139,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1469,SLCC_SC,0,0,4,8823.249999999733,27991,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1470,SLCC_TL,0,0,4,12414.521739130181,39384,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1471,SLCC_WEST,0,0,4,3633.510869565229,11527,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1472,SLC_Library,0,0,4,2310.228260869556,7329,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1473,TempleSquare,0,0,4,12491.119565217161,39627,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1474,UOFU_MAIN,0,0,4,36912.902173909075,117103,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1475,UOFU_MED,0,0,4,31574.38043477941,100167,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1476,UVU_GENEVA,0,0,4,10263.793478260499,32561,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1477,UVU_MAIN,0,0,4,30365.83695651925,96333,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1478,UVU_PAYSON,0,0,4,631.3804347826132,2003,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1479,UVU_THANKP,0,0,4,4348.108695652169,13794,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1480,UVU_VINE,0,0,4,333.18478260869716,1057,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1481,WESTMIN,0,0,4,4277.499999999996,13570,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1482,WSU_DAVIS,0,0,4,12447.934782608529,39490,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1483,WSU_OGDEN,0,0,4,15546.206521738583,49319,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1484,WSU_WEST,0,0,4,6829.184782608633,21665,0: All Days (Mo-Su),0: All Day (12am-12am),4. Mar-May
+1485,Airport,1,0,4,69121.12820511684,92956,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1486,BYU,1,0,4,71277.53846153128,95856,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1487,ENSIGN,1,0,4,5453.487179487262,7334,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1488,Lagoon,1,0,4,4074.128205128272,5479,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1489,SLCC_AIRP,1,0,4,15217.564102564407,20465,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1490,SLCC_HL,1,0,4,6849.205128205232,9211,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1491,SLCC_HM,1,0,4,10071.923076923229,13545,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1492,SLCC_JD,1,0,4,5608.897435897511,7543,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1493,SLCC_LB,1,0,4,2340.820512820535,3148,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1494,SLCC_MEAD,1,0,4,2855.3846153846516,3840,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1495,SLCC_ML,1,0,4,8122.974358974589,10924,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1496,SLCC_SC,1,0,4,10547.8205128208,14185,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1497,SLCC_TL,1,0,4,16295.769230769652,21915,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1498,SLCC_WEST,1,0,4,5187.2820512821345,6976,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1499,SLC_Library,1,0,4,2340.820512820535,3148,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1500,TempleSquare,1,0,4,13252.256410256692,17822,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1501,UOFU_MAIN,1,0,4,45859.41025640596,61673,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1502,UOFU_MED,1,0,4,40212.58974358729,54079,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1503,UVU_GENEVA,1,0,4,11491.435897436178,15454,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1504,UVU_MAIN,1,0,4,41128.692307689744,55311,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1505,UVU_PAYSON,1,0,4,704.9230769230746,948,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1506,UVU_THANKP,1,0,4,5357.5641025641935,7205,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1507,UVU_VINE,1,0,4,345.0256410256409,464,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1508,WESTMIN,1,0,4,5104.000000000063,6864,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1509,WSU_DAVIS,1,0,4,14546.846153846274,19563,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1510,WSU_OGDEN,1,0,4,19447.102564103272,26153,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1511,WSU_WEST,1,0,4,7121.358974359032,9577,1: Weekday (Tu-Th),0: All Day (12am-12am),4. Mar-May
+1512,Airport,2,0,4,57036.30769230052,51136,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1513,BYU,2,0,4,31279.846153843864,28044,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1514,ENSIGN,2,0,4,1223.5769230769267,1097,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1515,Lagoon,2,0,4,14105.153846154124,12646,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1516,SLCC_AIRP,2,0,4,5289.153846153917,4742,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1517,SLCC_HL,2,0,4,4278.615384615401,3836,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1518,SLCC_HM,2,0,4,9526.50000000015,8541,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1519,SLCC_JD,2,0,4,1725.4999999999968,1547,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1520,SLCC_LB,2,0,4,2360.1538461538426,2116,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1521,SLCC_MEAD,2,0,4,664.7692307692354,596,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1522,SLCC_ML,2,0,4,1417.653846153842,1271,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1523,SLCC_SC,2,0,4,5853.538461538584,5248,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1524,SLCC_TL,2,0,4,6554.00000000012,5876,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1525,SLCC_WEST,2,0,4,1253.692307692308,1124,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1526,SLC_Library,2,0,4,2360.1538461538426,2116,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1527,TempleSquare,2,0,4,10813.653846154151,9695,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1528,UOFU_MAIN,2,0,4,17799.307692307946,15958,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1529,UOFU_MED,2,0,4,13091.269230769856,11737,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1530,UVU_GENEVA,2,0,4,7790.961538461695,6985,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1531,UVU_MAIN,2,0,4,11022.230769231213,9882,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1532,UVU_PAYSON,2,0,4,528.6923076923094,474,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1533,UVU_THANKP,2,0,4,1949.6923076922994,1748,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1534,UVU_VINE,2,0,4,255.42307692307656,229,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1535,WESTMIN,2,0,4,2818.5769230769315,2527,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1536,WSU_DAVIS,2,0,4,8416.69230769238,7546,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1537,WSU_OGDEN,2,0,4,6922.076923077106,6206,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1538,WSU_WEST,2,0,4,6369.961538461581,5711,2: Weekend Day (Sa-Su),0: All Day (12am-12am),4. Mar-May
+1944,Airport,0,0,5,75112.52173913305,238288,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1945,BYU,0,0,5,40410.86956521319,128200,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1946,ENSIGN,0,0,5,3171.402173913038,10061,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1947,Lagoon,0,0,5,22190.673913042818,70398,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1948,SLCC_AIRP,0,0,5,12623.826086956318,40048,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1949,SLCC_HL,0,0,5,6472.989130434725,20535,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1950,SLCC_HM,0,0,5,12505.304347825862,39672,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1951,SLCC_JD,0,0,5,2907.8804347826062,9225,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1952,SLCC_LB,0,0,5,2543.804347826079,8070,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1953,SLCC_MEAD,0,0,5,2236.152173913028,7094,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1954,SLCC_ML,0,0,5,5628.836956521606,17857,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1955,SLCC_SC,0,0,5,7296.336956521557,23147,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1956,SLCC_TL,0,0,5,11170.043478260619,35436,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1957,SLCC_WEST,0,0,5,3840.6086956521854,12184,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1958,SLC_Library,0,0,5,2543.804347826079,8070,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1959,TempleSquare,0,0,5,14098.728260869308,44727,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1960,UOFU_MAIN,0,0,5,32004.96739130166,101533,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1961,UOFU_MED,0,0,5,33154.88043477911,105181,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1962,UVU_GENEVA,0,0,5,9672.445652173585,30685,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1963,UVU_MAIN,0,0,5,22327.16304347636,70831,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1964,UVU_PAYSON,0,0,5,655.652173913049,2080,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1965,UVU_THANKP,0,0,5,4619.195652173906,14654,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1966,UVU_VINE,0,0,5,243.34782608695593,772,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1967,WESTMIN,0,0,5,2612.5217391304286,8288,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1968,WSU_DAVIS,0,0,5,12577.173913043292,39900,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1969,WSU_OGDEN,0,0,5,12616.576086955994,40025,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1970,WSU_WEST,0,0,5,6964.09782608689,22093,0: All Days (Mo-Su),0: All Day (12am-12am),5. Jun-Aug
+1971,Airport,1,0,5,78201.8461538363,105168,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1972,BYU,1,0,5,47191.17948717447,63464,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1973,ENSIGN,1,0,5,4260.769230769298,5730,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1974,Lagoon,1,0,5,18604.61538461594,25020,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1975,SLCC_AIRP,1,0,5,16610.30769230799,22338,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1976,SLCC_HL,1,0,5,7363.769230769338,9903,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1977,SLCC_HM,1,0,5,12657.384615384795,17022,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1978,SLCC_JD,1,0,5,3914.256410256464,5264,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1979,SLCC_LB,1,0,5,2456.820512820543,3304,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1980,SLCC_MEAD,1,0,5,2883.6410256410663,3878,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1981,SLCC_ML,1,0,5,7905.102564102783,10631,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1982,SLCC_SC,1,0,5,8604.076923077144,11571,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1983,SLCC_TL,1,0,5,14787.76923076963,19887,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1984,SLCC_WEST,1,0,5,5378.384615384692,7233,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1985,SLC_Library,1,0,5,2456.820512820543,3304,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1986,TempleSquare,1,0,5,15578.205128205513,20950,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1987,UOFU_MAIN,1,0,5,40515.23076922806,54486,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1988,UOFU_MED,1,0,5,42253.743589739934,56824,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1989,UVU_GENEVA,1,0,5,10556.743589743877,14197,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1990,UVU_MAIN,1,0,5,29626.102564104007,39842,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1991,UVU_PAYSON,1,0,5,747.3076923076893,1005,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1992,UVU_THANKP,1,0,5,5678.051282051367,7636,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1993,UVU_VINE,1,0,5,324.9487179487178,437,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1994,WESTMIN,1,0,5,2948.3333333333694,3965,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1995,WSU_DAVIS,1,0,5,14126.717948718097,18998,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1996,WSU_OGDEN,1,0,5,15663.717948718506,21065,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1997,WSU_WEST,1,0,5,7267.102564102617,9773,1: Weekday (Tu-Th),0: All Day (12am-12am),5. Jun-Aug
+1998,Airport,2,0,5,66906.22222221707,62292,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+1999,BYU,2,0,5,22777.888888888854,21207,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2000,ENSIGN,2,0,5,1083.740740740731,1009,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2001,Lagoon,2,0,5,26894.814814814723,25040,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2002,SLCC_AIRP,2,0,5,5563.703703703617,5180,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2003,SLCC_HL,2,0,5,4628.185185185123,4309,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2004,SLCC_HM,2,0,5,11917.925925926022,11096,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2005,SLCC_JD,2,0,5,1430.6666666666624,1332,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2006,SLCC_LB,2,0,5,2766.814814814795,2576,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2007,SLCC_MEAD,2,0,5,579.9999999999992,540,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2008,SLCC_ML,2,0,5,1612.1851851851807,1501,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2009,SLCC_SC,2,0,5,5368.222222222101,4998,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2010,SLCC_TL,2,0,5,5760.259259259167,5363,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2011,SLCC_WEST,2,0,5,1312.5185185185144,1222,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2012,SLC_Library,2,0,5,2766.814814814795,2576,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2013,TempleSquare,2,0,5,10872.851851851916,10123,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2014,UOFU_MAIN,2,0,5,13599.925925926374,12662,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2015,UOFU_MED,2,0,5,13749.22222222276,12801,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2016,UVU_GENEVA,2,0,5,7686.074074073909,7156,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2017,UVU_MAIN,2,0,5,8141.481481481218,7580,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2018,UVU_PAYSON,2,0,5,432.85185185185236,403,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2019,UVU_THANKP,2,0,5,1981.666666666664,1845,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2020,UVU_VINE,2,0,5,127.81481481481495,119,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2021,WESTMIN,2,0,5,1801.222222222219,1677,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2022,WSU_DAVIS,2,0,5,9217.70370370367,8582,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2023,WSU_OGDEN,2,0,5,6743.037037036854,6278,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
+2024,WSU_WEST,2,0,5,6421.888888888845,5979,2: Weekend Day (Sa-Su),0: All Day (12am-12am),5. Jun-Aug
