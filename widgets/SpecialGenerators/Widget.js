@@ -14,6 +14,10 @@ var dVolumeOrPercent = [
     { label: "Percent"   , value: "P" }
 ];
 
+var dTableValues = [
+    { label: "Factors"   , value: "F"},
+    { label: "Trips Ends", value: "V"}
+];
 
 var sDayType = "1"; // 1:Weekdays
 var sDayPart = "0"; // 1:All Day
@@ -21,7 +25,8 @@ var sDataPer = "1"; // 1:All Year
 var sSpecGen = "UOFU_MAIN";
 var sMapDisp = "DISTMED";
 var sVol_Per = "P";
-var sVol_Per_Label = "P";
+var sTablVal = "V";
+
 
 var wSG;
 
@@ -35,7 +40,7 @@ var curDayType = sDayType;
 var curDataPer = sDataPer;
 var curDayPart = sDayPart;
 var curVol_Per = sVol_Per;
-var curVol_Per_Label = sVol_Per;
+var curTablVal = sTablVal;
 var lyrTAZ;
 var lyrDispLayers = []          ;
 var sDispLayers   = []          ; // layer name for all display layers (filled programatically)
@@ -55,6 +60,8 @@ var bindata;
 
 var iPixelSelectionTolerance = 5;
 
+var WIDGETPOOLID_LEGEND = 0;
+
 define(['dojo/_base/declare',
         'jimu/BaseWidget',
         'jimu/LayerInfos/LayerInfos',
@@ -64,16 +71,11 @@ define(['dojo/_base/declare',
         'dijit/dijit',
         'dojox/charting/Chart',
         'dojox/charting/themes/Claro',
-        'dojox/charting/themes/Julie',
         'dojox/charting/SimpleTheme',
-        'dojox/charting/plot2d/Scatter',
         'dojox/charting/plot2d/Markers',
         'dojox/charting/plot2d/Columns',
         'dojox/charting/widget/Legend',
         'dojox/charting/action2d/Tooltip',
-        'dojox/layout/TableContainer',
-        'dojox/layout/ScrollPane',
-        'dijit/layout/ContentPane',
         'jimu/PanelManager',
         'dijit/form/TextBox',
         'dijit/form/ToggleButton',
@@ -106,8 +108,10 @@ define(['dojo/_base/declare',
         'dijit/form/CheckBox',
         'dojo/store/Observable',
         'dojox/charting/axis2d/Default',
+        'dojox/grid/DataGrid',
+        'dojo/data/ObjectStore',
         'dojo/domReady!'],
-function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart, Claro, Julie, SimpleTheme, Scatter, Markers, Columns, Legend, Tooltip, TableContainer, ScrollPane, ContentPane, PanelManager, TextBox, ToggleButton, LayerInfos, Query, QueryTask, FeatureLayer, FeatureTable, SimpleFillSymbol, SimpleLineSymbol, SimpleMarkerSymbol, TextSymbol, Font, LabelClass, InfoTemplate, Color, Map, ClassBreaksRenderer, Extent, Point, Memory, StoreSeries, Dialog, Button, RadioButton, MutliSelect, CheckedMultiSelect, Select, ComboBox, CheckBox, Observable) {
+function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart, Claro, SimpleTheme,  Markers, Columns, Legend, Tooltip, PanelManager, TextBox, ToggleButton, LayerInfos, Query, QueryTask, FeatureLayer, FeatureTable, SimpleFillSymbol, SimpleLineSymbol, SimpleMarkerSymbol, TextSymbol, Font, LabelClass, InfoTemplate, Color, Map, ClassBreaksRenderer, Extent, Point, Memory, StoreSeries, Dialog, Button, RadioButton, MutliSelect, CheckedMultiSelect, Select, ComboBox, CheckBox, Observable, DataGrid, ObjectStore) {
     // To create a widget, you need to derive from BaseWidget.
     
     return declare([BaseWidget], {
@@ -160,6 +164,9 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                             curSpecGen = this.value;
                             wSG._panToSpecGen();
                             wSG._updateDisplayLayer();
+                            wSG._setLegendBar();
+                            wSG._updateTableSeason();
+                            wSG._updateTableTimeOfDay();
                         }
                     }, "cmbSpecGen");
                     cmbSpecGen.startup();
@@ -180,14 +187,28 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                 onChange: function(){
                     curMapDisp = this.value;
                     wSG._updateDisplayLayer();
+                    wSG._setLegendBar();
                 }
             }, "cmbMapDisplayZone");
             _cmbMapDisplayZone.startup();
             _cmbMapDisplayZone.set("value",sMapDisp);
 
+            // Table value type
+            var _cmbTableValues = new Select({
+                id: "selectValue",
+                name: "selectValueName",
+                options: dTableValues,
+                onChange: function(){
+                    curTablVal = this.value;
+                    wSG._updateTableSeason();
+                    wSG._updateTableTimeOfDay();
+                }
+            }, "cmbTableValues");
+            _cmbTableValues.startup();
+            _cmbTableValues.set("value",sTablVal);
+
             // create radio buttons for both display of labels and symbology
             wSG._createRadioButtons(dVolumeOrPercent,"divVolumeOrPercentSection"     ,"vol_per"      , sVol_Per      );
-            wSG._createRadioButtons(dVolumeOrPercent,"divVolumeOrPercentLabelSection","vol_per_label", sVol_Per_Label);
 
             // Get DayType
             dojo.xhrGet({
@@ -198,6 +219,8 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                     console.log('codes_daytype.json');
                     daytype = obj;
                     wSG._createRadioButtons(daytype,"divDayTypeSection","daytype",sDayType);
+                    wSG._updateTableSeason();
+                    wSG._updateTableTimeOfDay();
                 },
                 error: function(err) {
                         /* this will execute if the response couldn't be converted to a JS object,
@@ -213,6 +236,8 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                     console.log('codes_dataper.json');
                     dataper = obj;
                     wSG._createRadioButtons(dataper,"divDataPerSection","dataper",sDataPer);
+                    wSG._updateTableSeason();
+                    wSG._updateTableTimeOfDay();
                 },
                 error: function(err) {
                         /* this will execute if the response couldn't be converted to a JS object,
@@ -228,6 +253,8 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                     console.log('codes_daypart.json');
                     daypart = obj;
                     wSG._createRadioButtons(daypart,"divDayPartSection","daypart",sDayPart);
+                    wSG._updateTableSeason();
+                    wSG._updateTableTimeOfDay();
                 },
                 error: function(err) {
                         /* this will execute if the response couldn't be converted to a JS object,
@@ -244,7 +271,7 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                     console.log('bindata.json');
                     bindata = obj;
                     // _CurDisplayItem = dDisplayOptions.filter( function(dDisplayOptions){return (dDisplayOptions['value']==curDisplay);} );
-                    // parent.setLegendBar(_CurDisplayItem[0]['label']);
+                    wSG._setLegendBar();
                     wSG._updateDisplayLayer();
                 },
                 error: function(err) {
@@ -387,10 +414,164 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                     parent.checkShed(val);
                 },
                 label: "OFF"
-            }, "traveltoggle");
-*/
+                        }, "traveltoggle");
+            */
 
+            //get dat for table
+            dojo.xhrGet({
+                url: "widgets/SpecialGenerators/data/SpecGenTAZ_SLDailyTotals.json",
+                handleAs: "json",
+                load: function(obj) {
+                    /* here, obj will already be a JS object deserialized from the JSON response */
+                    console.log('SpecGenTAZ_SLDailyTotals.json');
+                    dlytot = obj;
+
+                    //Populate dowFactors DataStore
+                    storedlytot = Observable(new Memory({
+                    data: {
+                        identifier: "SpecGen",
+                        items: dlytot
+                    }
+                    }));
+
+
+                                    
+                    //grid = new DataGrid({
+                    //    store: storedlytot,
+                    //    items: dlytot,
+                    //    //query: { id: "*" },
+                    //    //queryOptions: {},
+                    //    structure: [
+                    //        { name: "Period"  , field: "data_period", width: "25%" },
+                    //        { name: "Day Type", field: "day_type"   , width: "25%" },
+                    //        { name: "Day Part", field: "day_part"   , width: "25%" },
+                    //        { name: "Volume"  , field: "Volume"     , width: "25%" }
+                    //    ]
+                    //}, "grid");
+                    //grid.startup();
+
+                    wSG._updateTableSeason();
+                    wSG._updateTableTimeOfDay();
+                },
+                error: function(err) {
+                    /* this will execute if the response couldn't be converted to a JS object,
+                        or if the request was unsuccessful altogether. */
+                }
+            }); 
             wSG._changeZoom();
+           
+
+            //get dat for table - time of day
+            dojo.xhrGet({
+                url: "widgets/SpecialGenerators/data/SpecGenTAZ_SLTimeOfDayVolumes.json",
+                handleAs: "json",
+                load: function(obj) {
+                    /* here, obj will already be a JS object deserialized from the JSON response */
+                    console.log('SpecGenTAZ_SLTimeOfDayVolumes.json');
+                    todtot = obj;
+
+                    //Populate dowFactors DataStore
+                    storetodtot = Observable(new Memory({
+                    data: {
+                        identifier: "SpecGen",
+                        items: todtot
+                    }
+                    }));
+
+
+                                    
+                    //grid = new DataGrid({
+                    //    store: storedlytot,
+                    //    items: dlytot,
+                    //    //query: { id: "*" },
+                    //    //queryOptions: {},
+                    //    structure: [
+                    //        { name: "Period"  , field: "data_period", width: "25%" },
+                    //        { name: "Day Type", field: "day_type"   , width: "25%" },
+                    //        { name: "Day Part", field: "day_part"   , width: "25%" },
+                    //        { name: "Volume"  , field: "Volume"     , width: "25%" }
+                    //    ]
+                    //}, "grid");
+                    //grid.startup();
+
+                    wSG._updateTableSeason();
+                    wSG._updateTableTimeOfDay();
+                },
+                error: function(err) {
+                    /* this will execute if the response couldn't be converted to a JS object,
+                        or if the request was unsuccessful altogether. */
+                }
+            }); 
+            wSG._changeZoom();
+        },
+
+
+        _updateTableSeason: function(){
+            
+            var _arrayDayTypeSeries = [];
+            var _arrayDayTypeXDataPerVolumes = [];
+
+            var _normalizevolume;
+
+            //TPR CODE type, part, period
+            //get data for entire day, daypart_code = 0
+
+            if (typeof specgen !== 'undefined' && typeof daytype !== 'undefined' && typeof dataper !== 'undefined' && typeof daypart !== 'undefined' && typeof dlytot !== 'undefined') {
+                _normalizevolume = 1;
+                daytype.forEach((T) => {
+                    //_ssVolume = new StoreSeries(storedlytot, { query: { SpecGen: curSpecGen, daytype_code: T.daytype_code, daypart_code: 0}}, "Volume");
+                    //_arrayDayTypeSeries.push(_ssVolume)
+
+                    _arrayTPRVolume = [];
+                    dataper.forEach((R) => {
+                        var _volumerecord = dlytot.filter( function(dlytot){return (dlytot.SpecGen==curSpecGen && dlytot.daytype_code==T.daytype_code && dlytot.dataper_code==R.dataper_code);} );
+                        // should only be one value
+                        if (_volumerecord.length>0) {
+                            _tpr_volume = _volumerecord[0]['Volume'];
+                            if (T.daytype_code==0 && R.dataper_code==1) {
+                                _normalizevolume = _tpr_volume
+                            }
+                            _arrayTPRVolume.push(_tpr_volume);
+                            if (curTablVal=="V") {
+                                dom.byId("divTPR" + T.daytype_code.toString() + "0" + R.dataper_code.toString()).innerHTML = this._numberWithCommas(Math.round(_tpr_volume/100)*100);
+                            } else if (curTablVal=="F") {
+                                dom.byId("divTPR" + T.daytype_code.toString() + "0" + R.dataper_code.toString()).innerHTML = (_tpr_volume / _normalizevolume).toFixed(2);
+                            }
+                        }
+                    });
+                    _arrayDayTypeXDataPerVolumes.push(_arrayTPRVolume);
+                });
+            }
+
+        },
+
+        _updateTableTimeOfDay: function(){
+
+            //TPR CODE type, part, period
+            //get data for time of day by each season
+
+            if (typeof specgen !== 'undefined' && typeof daytype !== 'undefined' && typeof dataper !== 'undefined' && typeof daypart !== 'undefined' && typeof todtot !== 'undefined' && typeof dlytot !== 'undefined') {
+                daytype.forEach((T) => {
+                    //_ssVolume = new StoreSeries(storedlytot, { query: { SpecGen: curSpecGen, daytype_code: T.daytype_code, daypart_code: 0}}, "Volume");
+                    //_arrayDayTypeSeries.push(_ssVolume)
+                    daypart.forEach((P) => {
+                        dataper.forEach((R) => {
+                            var _volumerecord = todtot.filter( function(todtot){return (todtot.SpecGen==curSpecGen && todtot.daytype_code==T.daytype_code && todtot.daypart_code==P.daypart_code && todtot.dataper_code==R.dataper_code);} );
+                            // should only be one value
+                            if (_volumerecord.length>0) {
+                                _tpr_volume = _volumerecord[0]['Volume'];
+                                if (curTablVal=="V") {
+                                    dom.byId("divTPR" + T.daytype_code.toString() + P.daypart_code.toString()  + R.dataper_code.toString()).innerHTML = this._numberWithCommas(Math.round(_tpr_volume/100)*100);
+                                } else if (curTablVal=="F") {
+                                    var _volumerecord_day = dlytot.filter( function(dlytot){return (dlytot.SpecGen==curSpecGen && dlytot.daytype_code==T.daytype_code && dlytot.dataper_code==R.dataper_code);} );
+                                    _tpr_volume_day = _volumerecord_day[0]['Volume'];
+                                    dom.byId("divTPR" + T.daytype_code.toString() + P.daypart_code.toString() + R.dataper_code.toString()).innerHTML = (100*_tpr_volume/_tpr_volume_day).toFixed(0) + "%";   
+                                }
+                            }
+                        });
+                    });
+                });
+            }
 
         },
 
@@ -495,13 +676,12 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                         _strValue = this.id.charAt(this.id.length - 1);
                         // check which group radio button is in and assign cur value accordingly
                         switch(this.name) {
-                            case 'daytype'      : curDayType       = _strValue; break;
-                            case 'dataper'      : curDataPer       = _strValue; break;
-                            case 'daypart'      : curDayPart       = _strValue; break;
-                            case 'vol_per'      : curVol_Per       = _strValue; break;
-                            case 'vol_per_label': curVol_Per_Label = _strValue; break;
+                            case 'daytype'      : curDayType       = _strValue; wSG._updateRenderer(); break;
+                            case 'dataper'      : curDataPer       = _strValue; wSG._updateRenderer(); break;
+                            case 'daypart'      : curDayPart       = _strValue; wSG._updateRenderer(); break;
+                            case 'vol_per'      : curVol_Per       = _strValue; wSG._updateRenderer(); break;
                         }
-                        wSG._updateRenderer();
+                        wSG._setLegendBar();
                     }
                 }
             }
@@ -720,10 +900,6 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
             return curVol_Per.toLowerCase() + '_' + curDayType + curDayPart + curDataPer;
         },
 
-        _getLabelFieldName: function() {
-            return curVol_Per_Label.toLowerCase() + '_' + curDayType + curDayPart + curDataPer;
-        },
-
         _getCurDispLayerLoc: function() {
             _curLayerName = curSpecGen + "_gdb - "  + (curSpecGen + " " + curMapDisp).replace(/_/g, ' ');
             for (l in lyrDispLayers) {
@@ -783,20 +959,40 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
 
         },        
                 
-        setLegendBar: function() {
+        _setLegendBar: function() {
             console.log('setLegendBar');
 
-            _curdisplayitem = dDisplayOptions.filter( function(dDisplayOptions){return (dDisplayOptions['value']==curDisplay);} );
-            _curcategoryitem = dCategoryOptions.filter( function(dCategoryOptions){return (dCategoryOptions['value']==curCategory);} );
-            _curmodeitem = dModeOptions.filter( function(dModeOptions){return (dModeOptions['value']==curMode);} );
+            var _curSpecGen = "";
+            var _curDayType = "";
+            var _curDataPer = "";
+            var _curDayPart = "";
 
-            var _sLegend = _curmodeitem[0]['name'] + " " + _curcategoryitem[0]['name'] + " Compared to Average for " + this.getcurSpecGenName() +    " - " + _curdisplayitem[0]['label'] 
+            if (typeof specgen !== 'undefined' && typeof daytype !== 'undefined' && typeof dataper !== 'undefined' && typeof daypart !== 'undefined') {
+                _curSpecGen = specgen.filter( function(specgen){return (specgen['value']==curSpecGen);} );
+                _curDayType = daytype.filter( function(daytype){return (daytype['value']==curDayType);} );
+                _curDataPer = dataper.filter( function(dataper){return (dataper['value']==curDataPer);} );
+                _curDayPart = daypart.filter( function(daypart){return (daypart['value']==curDayPart);} );
 
-            dom.byId("LegendName").innerHTML = _sLegend;
-
-            if (typeof bindata !== 'undefined') {
-                for (var i=0;i<bindata.length;i++)
-                    dom.byId("divColor" + (i + 1).toString()).style.backgroundColor = bindata[i].Color;                        
+                var _displaytext = '';
+                if (curVol_Per=="P") {
+                    _displaytext = "Percent of Total Trips to/from "
+                } else if (curVol_Per=="V") {
+                    _displaytext = "Number of Trip Ends to/from "
+                }
+    
+                var _sLegend = '<strong>' + _displaytext + _curSpecGen[0]['label'] + "<br/>" + _curDataPer[0]['label'] + " - " +  _curDayType[0]['label'] + " - " + _curDayPart[0]['label'] + '</strong>';
+    
+                dom.byId("LegendName").innerHTML = _sLegend;
+    
+                if (typeof bindata !== 'undefined') {
+                    for (var i=1; i<=9; i++) {
+                        _id = curMapDisp + '_' + curVol_Per + '_' + i.toString();
+                        dom.byId("divColor" + (i).toString()).style.backgroundColor = bindata[_id].Color;
+                    }
+                }
+                dom.byId("divDetailsTitle").innerHTML = '<br/><strong>' + _curSpecGen[0]['label'] + " StreetLight Summary Tables" + '</strong><br/><br/>';
+            } else {
+                dom.byId("divDetailsTitle").innerHTML = '&nbsp;';
             }
         },
 
@@ -804,7 +1000,7 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
             console.log('_showLegend');
             var pm = PanelManager.getInstance();
             var bOpen = false;
-            
+        
             // Close Legend Widget if open
             for (var p=0; p < pm.panels.length; p++) {
                 if (pm.panels[p].label == "Legend") {
@@ -815,55 +1011,55 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
                 }
             }
         
+            // Open Legend Widget if not open
             if (!bOpen) {
-                // pm.showPanel(this.appConfig.widgetOnScreen.widgets[WIDGETPOOLID_LEGEND]);
+                pm.showPanel(wSG.appConfig.widgetPool.widgets[WIDGETPOOLID_LEGEND]);
             }
         },
 
         _panToSpecGen: function() {
             console.log('_panToSpecGen');
-            if (dom.byId("chkAutoPan").checked == true) {
-                
-                queryTask = new esri.tasks.QueryTask(lyrTAZ.url);
-                
-                query = new esri.tasks.Query();
-                query.returnGeometry = true;
-                query.outFields = ["*"];
-                query.where = sFNSGTAZID + "='" + wSG._getCurSpecGenTAZID() + "' AND SUBAREAID=1"; // ONLY SETUP FOR WASATCH FRONT AREA
-                
-                queryTask.execute(query, showResults);
-                
-                function showResults(featureSet) {
-                    
-                    var feature, featureId;
-                    
-                    // QueryTask returns a featureSet.    Loop through features in the featureSet and add them to the map.
-                    
-                    if (featureSet.features[0].geometry.type == "polyline" || featureSet.features[0].geometry.type == "polygon") { 
-                        // clearing any graphics if present. 
-                        wSG.map.graphics.clear(); 
-                        newExtent = new Extent(featureSet.features[0].geometry.getExtent()) 
-                            for (i = 0; i < featureSet.features.length; i++) { 
-                                var graphic = featureSet.features[i]; 
-                                var thisExtent = graphic.geometry.getExtent(); 
 
-                                // making a union of extent or previous feature and current feature. 
-                                newExtent = newExtent.union(thisExtent); 
-                                var _sfs = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
-                                    new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASHDOT,
-                                    new Color([255,0,0]), 2),new Color([255,255,0,0.25])
-                                );
-                                graphic.setSymbol(_sfs); 
-                                //graphic.setInfoTemplate(popupTemplate); 
-                                wSG.map.graphics.add(graphic); 
-                            } 
+            
+            queryTask = new esri.tasks.QueryTask(lyrTAZ.url);
+            
+            query = new esri.tasks.Query();
+            query.returnGeometry = true;
+            query.outFields = ["*"];
+            query.where = sFNSGTAZID + "='" + wSG._getCurSpecGenTAZID() + "' AND SUBAREAID=1"; // ONLY SETUP FOR WASATCH FRONT AREA
+            
+            queryTask.execute(query, showResults);
+            
+            function showResults(featureSet) {
+                
+                var feature, featureId;
+                
+                // QueryTask returns a featureSet.    Loop through features in the featureSet and add them to the map.
+                
+                if (featureSet.features[0].geometry.type == "polyline" || featureSet.features[0].geometry.type == "polygon") { 
+                    // clearing any graphics if present. 
+                    wSG.map.graphics.clear(); 
+                    newExtent = new Extent(featureSet.features[0].geometry.getExtent()) 
+                    for (i = 0; i < featureSet.features.length; i++) { 
+                        var graphic = featureSet.features[i]; 
+                        var thisExtent = graphic.geometry.getExtent(); 
 
+                        // making a union of extent or previous feature and current feature. 
+                        newExtent = newExtent.union(thisExtent); 
+                        var _sfs = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+                            new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                            new Color([255,255,0]), 5),new Color([255,255,0,0.25])
+                        );
+                        graphic.setSymbol(_sfs); 
+                        //graphic.setInfoTemplate(popupTemplate); 
+                        wSG.map.graphics.add(graphic); 
+                    } 
+
+                    if (dom.byId("chkAutoPan").checked == true) {
                         // zoom to new extent
-                        //wSG.map.setExtent(newExtent.expand(1.5)); 
-
+                        //wSG.map.setExtent(newExtent.expand(1.5));
                         // pan to center of TAZ
                         wSG.map.centerAt(newExtent.getCenter()); //recenters the map based on a map coordinate.
-
                     }
                 }
             }
@@ -911,16 +1107,16 @@ function(declare, BaseWidget, LayerInfos, registry, dom, domStyle, dijit, Chart,
         
             _exp = "";
 
-            if (curVol_Per_Label == 'P') {
-                _exp = "Text($feature[\"" + wSG._getLabelFieldName() + "\"],'#.00%')";
-            } else if (curVol_Per_Label == 'V') {
-                _exp = "Text($feature[\"" + wSG._getLabelFieldName() + "\"],'#,##0')";
+            if (curVol_Per == 'P') {
+                _exp = "Text($feature[\"" + wSG._getDisplayFieldName() + "\"],'#.00%')";
+            } else if (curVol_Per == 'V') {
+                _exp = "Text($feature[\"" + wSG._getDisplayFieldName() + "\"],'#,##0')";
             }
 
             // Create a JSON object which contains the labeling properties. At the very least, specify which field to label using the labelExpressionInfo property. Other properties can also be specified such as whether to work with coded value domains, fieldinfos (if working with dates or number formatted fields, and even symbology if not specified as above)
             labelClassOn = {
                 minScale: wSG._getMinScaleForLabels(),
-                labelExpression: "[" + wSG._getLabelFieldName() + "]",
+                labelExpression: "[" + wSG._getDisplayFieldName() + "]",
                 labelExpressionInfo: {expression: _exp}
             };
             labelClassOn.symbol = volumeLabel;
